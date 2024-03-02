@@ -109,7 +109,8 @@ class SiteDiscoveryTool:
                 res = os.popen('ip route show 0.0.0.0/0').read().strip().splitlines()
                 if len(res):
                     res = res[0].split()[1:]  # exclude the 1st token to make k-v pairs
-                    res = dict(zip(res[::2], res[1::2]))
+                    res = dict(zip(*[iter(res)] * 2))
+                    # res = dict(zip(res[::2], res[1::2]))
                     if 'src' not in res.keys():
                         # need to get interface ip with 'ip address show <interface name> up', e.g.
                         # $ ip address show eth0 up
