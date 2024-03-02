@@ -12,6 +12,7 @@ from utils import *
 class SiteDiscoveryTool:
 
     def __init__(self):
+        self.projDir = os.path.dirname(__file__)
         # check OS type, currently for windows and linux
         self.osType = platform.system().upper()
         self.osPlatform = platform.platform()
@@ -44,6 +45,7 @@ class SiteDiscoveryTool:
             print(f'[ERROR] Cannot find shell on {self.osType}')
             print(f'[INFO] {self.osPlatform}')
             print('[INFO] only Windows powershell and Linux bash are supported')
+        self.artefactDir = os.path.join(self.projDir, 'artifacts', self.shType)
         self.playbook: dict = {}
         self.threadPool = None
         self.localNetwork = {}
@@ -60,43 +62,25 @@ class SiteDiscoveryTool:
         if self.shType == 'powershell':
             # Get the IPv4 default gateway.
             # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
-            cmd = 'Get-NetRoute -AddressFamily IPv4 0.0.0.0/0'
-            lst_gw = os.popen(f'{self.shPath} ({cmd}).NextHop').read().strip().splitlines()
-            if len(lst_gw) == 0:
+            ps1 = os.path.join(self.artefactDir, 'get_local_network.ps1')
+            try:
+                if_idx, gw, ip = os.popen(f'{self.shPath} -F {ps1}').read().splitlines()
+            except:
                 print(f'[MAJOR] Cannot get local network config => {self.shType}')
                 return
-            for gw in lst_gw:
-                if is_ipv4_unicast(gw):
-                    self.localNetwork['gw'] = gw
-                    break
-            if self.localNetwork['gw'] is None:
-                print(f'[MAJOR] Cannot execute command to get local network config => {cmd}')
-                return
-            lst_if_idx = os.popen(f'{self.shPath} ({cmd}).ifIndex').read().strip().splitlines()
-            lst_rm = os.popen(f'{self.shPath} ({cmd}).RouteMetric').read().strip().splitlines()
-            lst_im = os.popen(f'{self.shPath} ({cmd}).InterfaceMetric').read().strip().splitlines()
-            lst_res = [dict(zip(['gw', 'ifIdx', 'rm', 'im', 'metric'], [a, b, int(c), int(d), int(c) + int(d)])
-                            ) for a, b, c, d, in zip(lst_gw, lst_if_idx, lst_rm, lst_im)]
-            lst_res.sort(key=lambda x: x['metric'])
-            tmp_ret = lst_res[0]
-            self.localNetwork['gw'] = tmp_ret['gw']
-            # PS pipeline cannot be connected when call from python
-            # cmd = ( "Get-NetRoute -AddressFamily IPv4|"
-            #         "WHERE {$_.NextHop -ne '0.0.0.0'}|"
-            #         "SORT {$_.RouteMetric + $_.interfaceMetric}|"
-            #         "SELECT -first 1")
-
-            # get IP of the egress interface towards the default gateway
-            cmd = f"Get-NetIPAddress -AddressFamily IPv4 -ifIndex {tmp_ret['ifIdx']} -type UNICAST"
-            lst_ip = os.popen(f'{self.shPath} ({cmd}).IPAddress').read().strip().splitlines()
-            if len(lst_ip):
-                self.localNetwork['ip'] = lst_ip[0]
+            if is_ipv4_unicast(gw):
+                self.localNetwork['gw'] = gw
+            if is_ipv4_unicast(ip):
+                self.localNetwork['ip'] = ip
 
             # get local DNS Server
-            # if ret['gw'] is not None:
-            #     cmd = f"(Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex {tmp_ret['ifIdx']})"
-            #     lst_dns = os.popen(f'{self.shPath} ({cmd}).ServerAddresses').read().strip().splitlines()
-            #     ret['dns'] = [x for x in lst_dns if is_ipv4_unicast(x)]
+            ps1 = os.path.join(self.artefactDir, 'get_local_dns.ps1')
+            if self.localNetwork['gw'] is not None:
+                dns_ip = os.popen(f'{self.shPath} -F {ps1} -if_idx {if_idx}').read().strip()
+            else:
+                dns_ip = os.popen(f'{self.shPath} -F {ps1}').read().strip()
+            if is_ipv4_unicast(dns_ip):
+                self.localNetwork['dns'] = dns_ip
 
         # Linux Bash
         elif self.shType == 'bash':
