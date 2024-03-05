@@ -175,7 +175,7 @@ class SiteDiscoveryTool:
             for p in ['UDP', 'TCP']:
                 res = resolve_dns(host=host, dns_svr_lst=[svr], port=port, proto=p)
                 self.results['dns'].append(res)
-                self.log(f'DNS Server {svr}:{port}({p}) => {'OK' if res.bOK else 'FAIL'}')
+                self.log(f"DNS Server {svr}:{port}({p}) => {'OK' if res.bOK else 'FAIL'}")
 
     def verify_tcp_playbook(self):
         if 'tcp' not in self.playbook.keys():
