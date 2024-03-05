@@ -1,4 +1,4 @@
-$if_idx = $gw = $ip = $null
+$if_idx = $gw = $ip = $dns = $null
 # Get the IPv4 default gateway.
 # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
 $rt = Get-NetRoute 0.0.0.0/0 |
@@ -17,7 +17,20 @@ if ({$rt | Measure-Object}.Count -eq 1) {
         $ip = $intf.IPAddress
     }
 }
+# Get Local DNS Server
+if ($if_idx) {
+    $dns_info = Get-DnsClientServerAddress -AddressFamily 'IPv4' |
+            Where-Object {$_.ServerAddresses -ne '' -AND $_.InterfaceIndex -eq $if_idx} |
+            Select-Object -First 1
+} else {
+    $dns_info = Get-DnsClientServerAddress -AddressFamily 'IPv4' |
+            Where-Object {$_.ServerAddresses -ne ''} |
+            Select-Object -First 1
+}
+if ({$dns_info | Measure-Object}.Count -ne 0) {
+    $dns = $dns_info.ServerAddresses | Select-Object -first 1
+}
 # Add empty string to end of null object, to keep EOL output
-Write-Host ($if_idx + '')
 Write-Host ($gw + '')
 Write-Host ($ip + '')
+Write-Host ($dns + '')

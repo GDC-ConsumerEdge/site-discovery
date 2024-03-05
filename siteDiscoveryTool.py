@@ -29,8 +29,10 @@ class SiteDiscoveryTool:
             for sh in ['pwsh', 'powershell']:
                 self.shPath = shutil.which(sh)
                 if self.shPath is not None:
-                    self.shType = 'powershell'
-                    break
+                    # Requires Powershell Version >= 5
+                    if int(os.popen(f'{self.shPath} (Get-Host).Version.Major').read().strip()) >= 5:
+                        self.shType = 'powershell'
+                        break
         elif self.osType == 'LINUX':
             if os.geteuid():
                 self.isRoot = False
@@ -46,10 +48,12 @@ class SiteDiscoveryTool:
             print(f'[INFO] {self.osPlatform}')
             print('[INFO] only Windows powershell and Linux bash are supported')
         self.artefactDir = os.path.join(self.projDir, 'artifacts', self.shType)
-        self.playbook: dict = {}
+        self.playbook = {}
         self.threadPool = None
         self.localNetwork = {}
         self.results = {}
+        self.dns_svr_lst = []
+        self.logger = None
 
     def get_local_network_info(self):
         r"""
@@ -64,7 +68,7 @@ class SiteDiscoveryTool:
             # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
             ps1 = os.path.join(self.artefactDir, 'get_local_network.ps1')
             try:
-                if_idx, gw, ip = os.popen(f'{self.shPath} -F {ps1}').read().splitlines()
+                gw, ip, dns_svr = os.popen(f'{self.shPath} -F {ps1}').read().splitlines()
             except:
                 print(f'[MAJOR] Cannot get local network config => {self.shType}')
                 return
@@ -72,16 +76,8 @@ class SiteDiscoveryTool:
                 self.localNetwork['gw'] = gw
             if is_ipv4_unicast(ip):
                 self.localNetwork['ip'] = ip
-
-            # get local DNS Server
-            ps1 = os.path.join(self.artefactDir, 'get_local_dns.ps1')
-            if self.localNetwork['gw'] is not None:
-                dns_ip = os.popen(f'{self.shPath} -F {ps1} -if_idx {if_idx}').read().strip()
-            else:
-                dns_ip = os.popen(f'{self.shPath} -F {ps1}').read().strip()
-            if is_ipv4_unicast(dns_ip):
-                self.localNetwork['dns'] = dns_ip
-
+            if is_ipv4_unicast(dns_svr):
+                self.localNetwork['dns'] = dns_svr
         # Linux Bash
         elif self.shType == 'bash':
             # check 'netstat', 'route', or 'ip' command
@@ -141,9 +137,82 @@ class SiteDiscoveryTool:
         if len(ns):
             self.localNetwork['dns'] = ns[0]
 
-    def load_playbook(self, file_stream: TextIO):
-        self.playbook = yaml.safe_load(file_stream)
-        # yaml.safe_dump(self.playbook, sort_keys=False)
+    def load_playbook(self, file_stream: TextIO) -> bool:
+        try:
+            self.playbook = yaml.safe_load(file_stream)
+            # yaml.safe_dump(self.playbook, sort_keys=False)
+        except:
+            return False
+        return True
+
+    def _get_dns_svr_list(self):
+        dns_svr_lst = []
+        # print(f'===>0. self.playbook.keys() = {self.playbook.keys()}')
+        if 'dns' in self.playbook.keys():
+            dns_svr_lst += self.playbook['dns']
+        else:
+            dns_svr_lst |= ['8.8.8.8', '8.8.4.4']
+        # print(f'===>1. dns_svr_lst = {dns_svr_lst}')
+        if self.localNetwork['dns'] is not None:
+            if self.localNetwork['dns'] not in dns_svr_lst:
+                dns_svr_lst.append(self.localNetwork['dns'])
+        # print(f'===>2. dns_svr_lst = {dns_svr_lst}')
+        self.dns_svr_lst = dns_svr_lst
+
+    def verify_playbook_dns(self):
+        if len(self.localNetwork) == 0:
+            print('Please call get_local_network_info() first')
+            return
+        elif len(self.playbook) == 0:
+            print('Please call load_playbook() first')
+            return
+        self._get_dns_svr_list()
+        # use qbone-us-east1.google.com as the testing target
+        host = 'qbone-us-east1.google.com'
+        port = 53
+        self.results['dns'] = []
+        for svr in self.dns_svr_lst:
+            for p in ['UDP', 'TCP']:
+                res = resolve_dns(host=host, dns_svr_lst=[svr], port=port, proto=p)
+                self.results['dns'].append(res)
+                self.log(f'DNS Server {svr}:{port}({p}) => {'OK' if res.bOK else 'FAIL'}')
+
+    def verify_tcp_playbook(self):
+        if 'tcp' not in self.playbook.keys():
+            return
+        for i in self.playbook['tcp']:
+            try:
+                host, port = i.split(':')
+                port = int(port)
+            except:
+                continue
+            res = resolve_dns(host=host, dns_svr_lst=self.dns_svr_lst)
+            if res.bOK:
+                self.log(f"{host} => {list(res.extracts)}")
+                for k, ip in enumerate(res.extracts):
+                    con = verify_tcp_connection(ip, port)
+                    self.log_result(con)
+            else:
+                self.log_result(res)
+
+    def bind_logger(self, logger: Logger):
+        self.logger = logger
+
+    def log(self, s: str, timestamp: bool = True, flush: bool = True):
+        if self.logger is None:
+            print(s)
+        else:
+            self.logger.print(s, timestamp, flush)
+
+    def log_result(self, r: VerifyResults):
+        s = r.cmd
+        if r.bOK:
+            s += ' => OK'
+            if len(r.extracts):
+                s += f' => {str(r.extracts)}'
+        else:
+            s += f' => FAIL => {r.errReason}'
+        self.log(s)
 
     def bind_thread_pool(self, thread_pool: ThreadPool):
         self.threadPool = thread_pool
@@ -154,15 +223,9 @@ class SiteDiscoveryTool:
         else:
             self.run_playbook_multi_thread()
 
-    def verify_dns(self):
-        # looking for key 'firewall'
-        lst = [x for x in self.playbook.keys() if x.upper() == 'FIREWALL'][0]
-
     def run_playbook_single_tread(self):
         pass
 
     def run_playbook_multi_thread(self):
         pass
 
-    def get_dns_result(self):
-        pass
