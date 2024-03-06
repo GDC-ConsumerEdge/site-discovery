@@ -5,6 +5,12 @@ dns:
 ntp:
   - time.google.com
 tcp:
+  - accounts.gdce.googleapis.com:443
+  - alt1-cache-management-prod.gdce.googleapis.com:443
+  - cache-management-prod.gdce.googleapis.com:443
+  - cloudresourcemanager.gdce.googleapis.com:443
+  - compute.gdce.googleapis.com:443
+ssl:
   - gmec-ipxe.storage.googleapis.com:443
   - offnetmanagemet-pa.googleapis.com:443
   - cloudresourcemanager.googleapis.com:443
@@ -30,11 +36,6 @@ tcp:
   - storage.googleapis.com:443
   - sts.googleapis.com:443
   - www.googleapis.com:443
-  - accounts.gdce.googleapis.com:443
-  - alt1-cache-management-prod.gdce.googleapis.com:443
-  - cache-management-prod.gdce.googleapis.com:443
-  - cloudresourcemanager.gdce.googleapis.com:443
-  - compute.gdce.googleapis.com:443
   - connectgateway.gdce.googleapis.com:443
   - containerregistry.gdce.googleapis.com:443
   - edgecontainer.gdce.googleapis.com:443

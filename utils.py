@@ -5,16 +5,22 @@ import re
 import shutil
 from typing import TextIO
 from datetime import datetime
+from time import ctime
 import ipaddress
 import socket
 import ssl
-import dns.resolver, dns.reversename
-from dataclasses import dataclass
+import dns.resolver
+import dns.reversename
+import ntplib
+from dataclasses import dataclass, field
+from aioquic.asyncio.client import connect
+from aioquic.asyncio.protocol import QuicConnectionProtocol
+from aioquic.quic.configuration import QuicConfiguration
 
 
 class Logger:
     def __init__(self):
-        self.output_list = {sys.stdout}
+        self.output_list = set()
 
     def get_output_list(self):
         return list(self.output_list)
@@ -43,7 +49,7 @@ class VerifyResults:
     errReason: str = ''
     cmd: str = ''
     response: str = ''
-    extracts: tuple = ()
+    abstracts: dict = field(default_factory=lambda: {})
 
 
 def is_ipv4_unicast(ip_str: str) -> bool:
@@ -87,12 +93,14 @@ def ping_host(dst_ip: str) -> VerifyResults:
 
 def ping_icmplib(dst_ip: str) -> VerifyResults:
     ret = VerifyResults()
+    ret.abstracts['ip'] = dst_ip
     import icmplib
     cmd = f'icmplib.ping(address={dst_ip}, count=4, interval=0.2, timeout=1, privileged=False)'
     res = icmplib.ping(address=dst_ip, count=4, interval=0.2, timeout=1, privileged=False)
     ret.bOK = res.is_alive
     ret.cmd = cmd
     ret.response = str(res)
+    ret.abstracts['loss_perc'] = res.packet_loss * 100
     if not ret.bOK:
         ret.errReason = f'{res.packet_loss * 100:.0f}% packet loss'
     return ret
@@ -100,6 +108,7 @@ def ping_icmplib(dst_ip: str) -> VerifyResults:
 
 def ping_cli(dst_ip: str) -> VerifyResults:
     ret = VerifyResults()
+    ret.abstracts['ip'] = dst_ip
     os_type = platform.system().upper()
     if shutil.which('ping'):
         if os_type == 'WINDOWS':
@@ -141,6 +150,7 @@ def ping_cli(dst_ip: str) -> VerifyResults:
             g = re.search(r',\s*([.\d]+)% packet loss,', res)
 
         if g:
+            ret.abstracts['loss_perc'] = g[1]
             if float(g[1]) <= 50:
                 ret.bOK = True  # Packet loss <= 50, consider the dst ip is alive
             else:
@@ -186,7 +196,8 @@ def arp_cli(ip_str: str) -> VerifyResults:
         # 192.168.0.1              ether   42:01:c0:a8:00:01   C                     ens4
         mac_lst = [y[2] for y in [x.split() for x in res.splitlines() if len(x.split()) == 5] if y[0] == ip_str]
     if len(mac_lst) > 0:
-        ret.extracts = (''.join(re.split('[-:]', mac_lst[0])),)
+        ret.bOK = True
+        ret.abstracts['mac'] = ''.join(re.split('[-:]', mac_lst[0]))
 
     return ret
 
@@ -199,12 +210,19 @@ def resolve_dns(host: str, dns_svr_lst=None, port: int = 53, proto: str = 'UDP')
         r.nameservers = dns_svr_lst
     r.port = port
     ret.cmd = f"DNS lookup: {host}, Server: {dns_svr_lst if dns_svr_lst else 'host config'}, Port: {port}({proto})"
+    ret.abstracts = {
+        'host': host,
+        'port': port,
+        'proto': proto
+    }
+    if dns_svr_lst:
+        ret.abstracts['dns'] = dns_svr_lst
     try:
         answers = r.resolve(qname=host, rdtype=dns.rdatatype.A, tcp=tcp_flag)
         ret.response = '\n'.join([rdata.to_text() for rdata in answers])
         ip_lst = [rdata.to_text() for rdata in answers if is_ipv4_unicast(rdata.to_text())]
         if len(ip_lst):
-            ret.extracts = tuple(ip_lst)
+            ret.abstracts['ip'] = ip_lst
             ret.bOK = True
         else:
             ret.errReason = 'Cannot resolve to IPv4 address'
@@ -233,37 +251,91 @@ def reverse_dns(ip_str: str, dns_svr_list=None) -> str:
     return ret
 
 
+def verify_ntp(ntp_svr: str, svr_ip: str = None) -> VerifyResults:
+    ret = VerifyResults()
+    if is_ipv4_unicast(ntp_svr):
+        ip = ntp_svr
+    elif is_ipv4_unicast(svr_ip):
+        ip = svr_ip
+    else:
+        ip = None
+    if ip == ntp_svr or ip is None:
+        svr_str = ntp_svr
+    else:
+        svr_str = f'{ntp_svr}<{ip}>'
+    ret.cmd = f"ntplib.NTPClient.request({svr_str}, version=4)"
+    ret.abstracts['ntp_svr'] = ntp_svr
+    if ip:
+        ret.abstracts['ntp_svr_ip'] = ip
+    ntp_client = ntplib.NTPClient()
+    try:
+        ntp_reply = ntp_client.request(ip, version=4)
+        ret.bOK = True
+        ret.abstracts['tx_time'] = ctime(ntp_reply.tx_time)
+        ret.abstracts['offset'] = ntp_reply.offset
+        ret.abstracts['root_delay'] = ntp_reply.root_delay
+        ret.response = ret.abstracts['tx_time']
+    except Exception as e:
+        ret.errReason = type(e).__name__
+        ret.response = str(e)
+
+    return ret
+
+
 def verify_tcp_connection(ip: str, port: int) -> VerifyResults:
     ret = VerifyResults()
     ret.cmd = f'use socket to connect {ip}:{port}(TCP)'
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5)
+    ret.abstracts['host'] = ip
+    ret.abstracts['proto'] = 'TCP'
+    ret.abstracts['port'] = port
     try:
         s.connect((ip, port))
+        ip_port = s.getpeername()
+        ret.abstracts['ip'] = ip_port[0]
         ret.bOK = True
     except Exception as e:
         ret.errReason = type(e).__name__
+        ret.response = str(e)
     s.settimeout(None)
     return ret
 
 
-def verify_ssl_connection(host: str, port: int) -> VerifyResults:
+def verify_ssl_connection(host: str, port: int, ip: str = None) -> VerifyResults:
     ret = VerifyResults()
     ret.cmd = f'use ssl to connect {host}:{port}'
+    ret.abstracts['host'] = host
+    ret.abstracts['port'] = port
+    ret.abstracts['proto'] = 'SSL'
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5)
     context = ssl.create_default_context()
     try:
-        s.connect((host, port))
-        ip = s.getpeername()
+        if (not is_ipv4_unicast(host)) and is_ipv4_unicast(ip):
+            s.connect((ip, port))
+        else:
+            s.connect((host, port))
+        ip_port = s.getpeername()
+        ret.abstracts['ip'] = ip_port[0]
         ss = context.wrap_socket(s, server_hostname=host)
         ret.bOK = True
-        ret.extracts = (ss.version(), ip)
+        ret.abstracts['proto'] = ss.version()
         s.close()
     except Exception as e:
         ret.errReason = type(e).__name__
-        # print(e)
+        ret.response = str(e)
     # s.settimeout(None)
+    return ret
+
+
+def verify_quic_connection(host: str, port: int, ip: str = None) -> VerifyResults:
+    ret = VerifyResults()
+    ret.cmd = f'use quic to connect {host}:{port}'
+    ret.abstracts['host'] = host
+    ret.abstracts['port'] = port
+    ret.abstracts['proto'] = 'QUIC'
+
     return ret
 
 def parse_range(r: str) -> list:
