@@ -13,9 +13,9 @@ import dns.resolver
 import dns.reversename
 import ntplib
 from dataclasses import dataclass, field
-from aioquic.asyncio.client import connect
-from aioquic.asyncio.protocol import QuicConnectionProtocol
-from aioquic.quic.configuration import QuicConfiguration
+# from aioquic.asyncio.client import connect
+# from aioquic.asyncio.protocol import QuicConnectionProtocol
+# from aioquic.quic.configuration import QuicConfiguration
 
 
 class Logger:
@@ -170,7 +170,7 @@ def arp_cli(ip_str: str) -> VerifyResults:
     if os_type == 'WINDOWS':
         cmd = 'arp -a'
     elif os_type == 'LINUX':
-        cmd = 'arp'
+        cmd = 'arp -n'
     else:
         ret.errReason = 'Unsupported OS'
         return ret
@@ -191,7 +191,7 @@ def arp_cli(ip_str: str) -> VerifyResults:
         #   255.255.255.255       ff-ff-ff-ff-ff-ff     static
         mac_lst = [y[1] for y in [x.split() for x in res.splitlines() if len(x.split()) == 3] if y[0] == ip_str]
     else:  # LINUX
-        # $ arp
+        # $ arp -n
         # Address                  HWtype  HWaddress           Flags Mask            Iface
         # 192.168.0.1              ether   42:01:c0:a8:00:01   C                     ens4
         mac_lst = [y[2] for y in [x.split() for x in res.splitlines() if len(x.split()) == 5] if y[0] == ip_str]
