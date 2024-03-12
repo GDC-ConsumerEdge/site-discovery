@@ -1,6 +1,4 @@
-import os
 import sys
-from datetime import datetime
 import argparse
 from siteDiscoveryTool import SiteDiscoveryTool
 from utils import *
@@ -92,7 +90,7 @@ def main():
     log.print('='*60, timestamp=False)
 
     # load playbook
-    print('Loading Playbook ... ', end='')
+    print(f'Loading Playbook {config_dict['playbook']} ...', end='')
     with open(config_dict['playbook'], 'r') as input_file:
         if not tool.load_playbook(input_file):
             print('NOK.')

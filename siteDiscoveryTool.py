@@ -1,10 +1,4 @@
-import os
-import platform
 import sys
-from typing import TextIO
-import shutil
-import re
-from time import ctime
 import yaml
 import dns.resolver
 from prettytable import PrettyTable

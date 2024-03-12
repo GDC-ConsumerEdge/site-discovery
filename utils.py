@@ -1,6 +1,5 @@
 import platform
 import os
-import sys
 import re
 import shutil
 from typing import TextIO
@@ -14,9 +13,6 @@ import dns.reversename
 import ntplib
 from dataclasses import dataclass, field
 from http3_client import quic_client_request
-# from aioquic.asyncio.client import connect
-# from aioquic.asyncio.protocol import QuicConnectionProtocol
-# from aioquic.quic.configuration import QuicConfiguration
 
 
 class Logger:
@@ -342,7 +338,7 @@ def verify_quic_connection(host: str, port: int) -> VerifyResults:
         content = res['contents'][0]
         ret.response = headers + content
         ret.abstracts['http_code'] = None
-        g= re.search(r':status:\s*(\d+)', headers)
+        g = re.search(r':status:\s*(\d+)', headers)
         if g:
             ret.abstracts['http_code'] = int(g[1])
             ret.bOK = True
@@ -350,6 +346,7 @@ def verify_quic_connection(host: str, port: int) -> VerifyResults:
         ret.errReason = type(e).__name__
         ret.response = str(e)
     return ret
+
 
 def parse_range(r: str) -> list:
     """

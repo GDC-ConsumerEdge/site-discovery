@@ -1,12 +1,10 @@
-import argparse
 import asyncio
 import logging
 import os
-import pickle
 import ssl
 import time
 from collections import deque
-from typing import BinaryIO, Callable, Deque, Dict, List, Optional, Union, cast
+from typing import BinaryIO, Callable, Deque, Dict, List, Optional, Union, cast, Any
 from urllib.parse import urlparse
 
 import aioquic
@@ -24,8 +22,7 @@ from aioquic.h3.events import (
 )
 from aioquic.quic.configuration import QuicConfiguration
 from aioquic.quic.events import QuicEvent
-from aioquic.quic.logger import QuicFileLogger
-from aioquic.tls import CipherSuite, SessionTicket
+from aioquic.tls import SessionTicket
 
 try:
     import uvloop
@@ -248,7 +245,7 @@ async def perform_http_request(
     data: Optional[str],
     include: bool,
     output_dir: Optional[str],
-) -> None:
+) -> Any:
     # perform request
     start = time.time()
     if data is not None:
@@ -294,7 +291,7 @@ def process_http_pushes(
     client: HttpClient,
     include: bool,
     output_dir: Optional[str],
-) -> None:
+) -> Any:
     for _, http_events in client.pushes.items():
         method = ""
         octets = 0
@@ -369,7 +366,7 @@ async def client_request(
     data: Optional[str],
     include: bool,
     output_dir: Optional[str] = None
-) -> None:
+) -> Any:
     # parse URL
     parsed = urlparse(urls[0])
     assert parsed.scheme in (
@@ -450,7 +447,11 @@ def quic_client_request(
         legacy_http: bool = False,
         insecure: bool = False):
     # prepare configuration
-    configuration = QuicConfiguration(is_client=True, alpn_protocols=H0_ALPN if legacy_http else H3_ALPN)
+    configuration = QuicConfiguration(
+        is_client=True,
+        alpn_protocols=H0_ALPN if legacy_http else H3_ALPN,
+        idle_timeout=5  # default is 60, tooooo long for test
+    )
     if insecure:
         configuration.verify_mode = ssl.CERT_NONE
     if uvloop is not None:
