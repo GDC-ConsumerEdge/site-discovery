@@ -308,6 +308,26 @@ class SiteDiscoveryTool:
                     self.results[proto].append(con)
             print(f'\rVerifying {proto.upper()} connections ... {total}/{total}')
 
+    def verify_playbook_qbone(self):
+        proto = 'qbone'
+        if proto not in self.playbook.keys():
+            return False
+        if proto not in self.results.keys():
+            self.results[proto] = []
+        total = len(self.playbook[proto])
+        print(f'Verifying {proto.upper()} connections ... 0/{total}', end='')
+        for i, line in enumerate(self.playbook[proto]):
+            print(f'\rVerifying {proto.upper()} connections ... {i + 1}/{total}', end='')
+            try:
+                host, port = line.split(':')
+                port = int(port)
+            except:
+                continue
+            con = verify_quic_connection(host, port)
+            self.log_result(con)
+            self.results[proto].append(con)
+        print(f'\rVerifying {proto.upper()} connections ... {total}/{total}')
+
     def bind_logger(self, logger: Logger):
         self.logger = logger
 
@@ -426,5 +446,21 @@ class SiteDiscoveryTool:
     def print_qbone_table(self):
         if 'qbone' not in self.results.keys():
             return
-        pass
+        table = PrettyTable()
+        table.field_names = ['P/F', "Host", "Port", "Proto", "HTTP CODE", 'Err Msg']
+        for res in self.results['qbone']:
+            table.add_row([
+                'PASS' if res.bOK else 'FAIL',
+                res.abstracts['host'],
+                res.abstracts['port'],
+                res.abstracts['proto'],
+                res.abstracts['http_code'] if 'http_code' in res.abstracts.keys() else '',
+                res.errReason
+            ])
+            # print(type(res.abstracts['host']))
+        print(f'Qbone Connection Verification', file=self.reporter)
+        table.align["HOST"] = "l"
+        table.align["Err Msg"] = "l"
+        print(table, file=self.reporter)
+        print('', file=self.reporter)
 

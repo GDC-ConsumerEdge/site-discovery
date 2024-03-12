@@ -129,13 +129,14 @@ def main():
     tool.verify_playbook_connection()
 
     # Verify qbone quic connections
+    tool.verify_playbook_qbone()
 
     # Create report
     print(f"Write report to {report_file_name} ... ", end='')
     tool.create_report()
     print('Done')
 
-    print(tool.results.keys())
+    # print(tool.results.keys())
 
 
 def usage():
