@@ -265,7 +265,7 @@ class SiteDiscoveryTool:
                 self.log_result(ntp_res)
                 self.results['ntp'].append(ntp_res)
         ret = False
-        if 'ntp' in self.results['ntp']:
+        if 'ntp' in self.results.keys():
             ret = True
             for res in self.results['ntp']:
                 if not res.bOK:
