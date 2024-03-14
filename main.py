@@ -14,49 +14,30 @@ def main():
         "-f",
         "--file",
         type=str,
+        default=os.path.join(proj_dir, 'playbook.yaml'),
         help="playbook yaml file. Default is 'playbook.yaml' in the installation directory"
     )
     parser.add_argument(
         "-l",
         "--log_dir",
         type=str,
+        default=os.getcwd(),
         help="log directory. Default is current working directory. log file name is 'site-discovery.log'"
     )
     parser.add_argument(
         "-r",
         "--report_dir",
         type=str,
+        default=os.getcwd(),
         help="""report directory. Default is the current working directory.
         report file name is 'site-discovery-report_<timestamp>.txt'. timestamp = YYYYmmDD-HHMMSS"""
     )
-
+    args = parser.parse_args()
     config_dict = {
-        'playbook': os.path.join(proj_dir, 'playbook.yaml'),
-        'log_dir': os.getcwd(),
-        'report_dir': os.getcwd()
+        'playbook': args.file,
+        'log_dir': args.log_dir,
+        'report_dir': args.report_dir
     }
-    prog_args = sys.argv[1:len(sys.argv)]
-    if len(prog_args):
-        try:
-            arg_dict = dict(zip(*[iter(prog_args)] * 2))
-        except:
-            print('Incorrect arguments!')
-            usage()
-            return
-        for k in arg_dict.keys():
-            if k == '-f':
-                if os.path.isfile(arg_dict[k]):
-                    config_dict['playbook'] = arg_dict[k]
-            elif k == '-l':
-                if os.path.isdir(arg_dict[k]):
-                    config_dict['log_dir'] = arg_dict[k]
-            elif k == '-r':
-                if os.path.isdir(arg_dict[k]):
-                    config_dict['report_dir'] = arg_dict[k]
-            else:
-                print(f'Unknown option {k}!')
-                usage()
-                return
 
     # Create tool instances
     tool = SiteDiscoveryTool()
@@ -90,7 +71,7 @@ def main():
     log.print('='*60, timestamp=False)
 
     # load playbook
-    print(f'Loading Playbook {config_dict['playbook']} ...', end='')
+    print(f"Loading Playbook {config_dict['playbook']} ...", end='')
     with open(config_dict['playbook'], 'r') as input_file:
         if not tool.load_playbook(input_file):
             print('NOK.')
@@ -135,18 +116,6 @@ def main():
     print('Done')
 
     # print(tool.results.keys())
-
-
-def usage():
-    usage_str = r'''
-Usage:
-
--f: playbook yaml file. Default is 'playbook.yaml' in the installation directory
--l: log directory. Default is current working directory.
-    log file name is 'site-discovery.log'
--r: report directory. Default is the current working directory.
-    report file name is 'site-discovery-report_<timestamp>.txt'. timestamp = YYYYmmDD-HHMMSS'''
-    print(usage_str)
 
 
 if __name__ == '__main__':
