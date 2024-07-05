@@ -219,7 +219,7 @@ def resolve_dns(host: str, dns_svr_lst=None, port: int = 53, proto: str = 'UDP')
         ret.response = '\n'.join([rdata.to_text() for rdata in answers])
         ip_lst = [rdata.to_text() for rdata in answers if is_ipv4_unicast(rdata.to_text())]
         if len(ip_lst):
-            ret.abstracts['ip'] = ip_lst
+            ret.abstracts['ip'] = sorted(ip_lst)
             ret.bOK = True
         else:
             ret.errReason = 'Cannot resolve to IPv4 address'
@@ -332,6 +332,8 @@ def verify_quic_connection(host: str, port: int) -> VerifyResults:
     ret.abstracts['host'] = host
     ret.abstracts['port'] = port
     ret.abstracts['proto'] = 'QUIC'
+    dns_results = resolve_dns(host)
+    ret.abstracts['ip'] = dns_results.abstracts['ip'] if dns_results.bOK else []
     try:
         res = quic_client_request([f"https://{host}:{port}"], include=True, insecure=True)
         headers = res['headers'][0]

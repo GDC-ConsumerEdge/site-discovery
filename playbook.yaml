@@ -5,37 +5,14 @@ dns:
 ntp:
   - time.google.com
 tcp:
+  - any-in-201a.1e100.net:3535
+  - any-in-221a.1e100.net:3535
+  - any-in-241a.1e100.net:3535
   - accounts.gdce.googleapis.com:443
   - alt1-cache-management-prod.gdce.googleapis.com:443
   - cache-management-prod.gdce.googleapis.com:443
   - cloudresourcemanager.gdce.googleapis.com:443
   - compute.gdce.googleapis.com:443
-ssl:
-  - gmec-ipxe.storage.googleapis.com:443
-  - offnetmanagemet-pa.googleapis.com:443
-  - cloudresourcemanager.googleapis.com:443
-  - compute.googleapis.com:443
-  - connectgateway.googleapis.com:443
-  - containerregistry.googleapis.com:443
-  - edgecontainer.googleapis.com:443
-  - edgenetwork.googleapis.com:443
-  - gkeconnect.googleapis.com:443
-  - gkehub.googleapis.com:443
-  - gkeonprem.googleapis.com:443
-  - gkeonprem.mtls.googleapis.com:443
-  - iamcredentials.googleapis.com:443
-  - iam.googleapis.com:443
-  - logging.googleapis.com:443
-  - monitoring.googleapis.com:443
-  - oauth2.googleapis.com:443
-  - opsconfigmonitoring.googleapis.com:443
-  - securetoken.googleapis.com:443
-  - servicecontrol.googleapis.com:443
-  - serviceusage.googleapis.com:443
-  - stackdriver.googleapis.com:443
-  - storage.googleapis.com:443
-  - sts.googleapis.com:443
-  - www.googleapis.com:443
   - connectgateway.gdce.googleapis.com:443
   - containerregistry.gdce.googleapis.com:443
   - edgecontainer.gdce.googleapis.com:443
@@ -59,18 +36,44 @@ ssl:
   - storage.gdce.googleapis.com:443
   - sts.googleapis.gdce.googleapis.com:443
   - www.googleapis.gdce.googleapis.com:443
-  - alt1-cache-management-prod.google.com:443
   - alt1.cache-management-prod.l.google.com:443
-  - cache-management-prod.google.com:443
-  - time.google.com:443
-  - cache-management-prod.google.com:443
   - cache-management-prod.l.google.com:443
+ssl:
   - accounts.google.com:443
+  - alt1-cache-management-prod.google.com:443
+  - cache-management-prod.google.com:443
+  - cloudresourcemanager.googleapis.com:443
+  - compute.googleapis.com:443
+  - connectgateway.googleapis.com:443
+  - containerregistry.googleapis.com:443
+  - edgecontainer.googleapis.com:443
+  - edgenetwork.googleapis.com:443
+  - gcr-io.googleapis.com:443
+  - gkeconnect.googleapis.com:443
+  - gkehub.googleapis.com:443
+  - gkeonprem.googleapis.com:443
+  - iam.googleapis.com:443
+  - iamcredentials.googleapis.com:443
+  - k8s-gcr-io.googleapis.com:443
+  - logging.googleapis.com:443
+  - monitoring.googleapis.com:443
+  - gkeonprem.mtls.googleapis.com:443
+  - oauth2.googleapis.com:443
+  - offnetmanagemet-pa.googleapis.com:443
+  - opsconfigmonitoring.googleapis.com:443
+  - securetoken.googleapis.com:443
+  - servicecontrol.googleapis.com:443
+  - serviceusage.googleapis.com:443
+  - stackdriver.googleapis.com:443
+  - storage.googleapis.com:443
+  - gmec-ipxe.storage.googleapis.com:443
+  - sts.googleapis.com:443
+  - www.googleapis.com:443
   - gcr.io:443
   - k8s.gcr.io:443
 qbone:
   - qbone-africa-south1.google.com:443
-  - qbone-apac-1.google.com:443
+#  - qbone-apac-1.google.com:443
   - qbone-apac-2.google.com:443
   - qbone-apac-3.google.com:443
   - qbone-asia-east1.google.com:443
@@ -98,7 +101,7 @@ qbone:
   - qbone-southamerica-east1.google.com:443
   - qbone-southamerica-east1-ext1.google.com:443
   - qbone-southamerica-west1.google.com:443
-  - qbone-us-central-quarantine-1.google.com:443
+#  - qbone-us-central-quarantine-1.google.com:443
   - qbone-us-central1.google.com:443
   - qbone-us-central2.google.com:443
   - qbone-us-east-1.google.com:443

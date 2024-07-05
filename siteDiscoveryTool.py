@@ -441,11 +441,12 @@ class SiteDiscoveryTool:
         if 'qbone' not in self.results.keys():
             return
         table = PrettyTable()
-        table.field_names = ['P/F', "Host", "Port", "Proto", "HTTP CODE", 'Err Msg']
+        table.field_names = ['P/F', "Host", "IP", "Port", "Proto", "HTTP CODE", 'Err Msg']
         for res in self.results['qbone']:
             table.add_row([
                 'PASS' if res.bOK else 'FAIL',
                 res.abstracts['host'],
+                ','.join(res.abstracts['ip']),
                 res.abstracts['port'],
                 res.abstracts['proto'],
                 res.abstracts['http_code'] if 'http_code' in res.abstracts.keys() else '',
@@ -454,6 +455,7 @@ class SiteDiscoveryTool:
             # print(type(res.abstracts['host']))
         print(f'Qbone Connection Verification', file=self.reporter)
         table.align["HOST"] = "l"
+        table.align["IP"] = "l"
         table.align["Err Msg"] = "l"
         print(table, file=self.reporter)
         print('', file=self.reporter)
