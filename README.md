@@ -12,7 +12,7 @@ However, if for any security reason the executable file cannot run, user could a
 ## Prepare the workspace
 ### clone the code repository
 ```
-git clone https://github.com/daniell76/siteDiscovery.git
+git clone https://gitlab.com/danielxia/site-discovery.git
 cd siteDiscovery
 ```
 ### create a virtual environment
