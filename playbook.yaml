@@ -5,9 +5,9 @@ dns:
 ntp:
   - time.google.com
 tcp:
-  - any-in-201a.1e100.net:3535
-  - any-in-221a.1e100.net:3535
-  - any-in-241a.1e100.net:3535
+#  - any-in-201a.1e100.net:3535
+#  - any-in-221a.1e100.net:3535
+#  - any-in-241a.1e100.net:3535
   - accounts.gdce.googleapis.com:443
   - alt1-cache-management-prod.gdce.googleapis.com:443
   - cache-management-prod.gdce.googleapis.com:443
