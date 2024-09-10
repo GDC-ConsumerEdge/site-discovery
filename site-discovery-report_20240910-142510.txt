@@ -1,9 +1,9 @@
 Host Network Config
-+---------------+-------------+-----------+
-|    Local IP   |   Gateway   | Local DNS |
-+---------------+-------------+-----------+
-| 192.168.32.64 | 192.168.0.1 |  8.8.8.8  |
-+---------------+-------------+-----------+
++-----------+---------------+-------------+-----------+
+| Interface |    Local IP   |   Gateway   | Local DNS |
++-----------+---------------+-------------+-----------+
+|  Ethernet | 192.168.32.64 | 192.168.0.1 |  8.8.8.8  |
++-----------+---------------+-------------+-----------+
 
 Default Gateway Verification
 +-----------------+------+--------------+
@@ -26,10 +26,10 @@ NTP Server Verification
 +------+-----------------+---------------+--------------------------+---------+
 | P/F  |       Host      | Resolved IP   | TX Time                  | Err Msg |
 +------+-----------------+---------------+--------------------------+---------+
-| PASS | time.google.com | 216.239.35.0  | Thu Aug  1 03:03:21 2024 |         |
-| PASS | time.google.com | 216.239.35.12 | Thu Aug  1 03:03:21 2024 |         |
-| PASS | time.google.com | 216.239.35.4  | Thu Aug  1 03:03:21 2024 |         |
-| PASS | time.google.com | 216.239.35.8  | Thu Aug  1 03:03:21 2024 |         |
+| PASS | time.google.com | 216.239.35.0  | Tue Sep 10 14:25:28 2024 |         |
+| PASS | time.google.com | 216.239.35.12 | Tue Sep 10 14:25:28 2024 |         |
+| PASS | time.google.com | 216.239.35.4  | Tue Sep 10 14:25:28 2024 |         |
+| PASS | time.google.com | 216.239.35.8  | Tue Sep 10 14:25:28 2024 |         |
 +------+-----------------+---------------+--------------------------+---------+
 
 TCP Connection Verification
@@ -149,31 +149,30 @@ TCP Connection Verification
 | PASS |       www.googleapis.gdce.googleapis.com       | 443  |  TCP  | 216.239.36.223  |         |
 | PASS |       www.googleapis.gdce.googleapis.com       | 443  |  TCP  | 216.239.38.223  |         |
 | PASS |    alt1.cache-management-prod.l.google.com     | 443  |  TCP  | 172.217.168.238 |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.100  |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.101  |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.102  |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.113  |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.138  |         |
-| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 64.233.166.139  |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.100 |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.101 |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.102 |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.113 |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.138 |         |
+| PASS |       cache-management-prod.l.google.com       | 443  |  TCP  | 142.251.173.139 |         |
 +------+------------------------------------------------+------+-------+-----------------+---------+
 
 SSL Connection Verification
 +------+---------------------------------------+------+---------+-----------------+---------+
 | P/F  |                  Host                 | Port |  Proto  | Resolved IP     | Err Msg |
 +------+---------------------------------------+------+---------+-----------------+---------+
-| PASS |          accounts.google.com          | 443  | TLSv1.3 | 108.177.15.84   |         |
+| PASS |          accounts.google.com          | 443  | TLSv1.3 | 142.251.168.84  |         |
 | PASS | alt1-cache-management-prod.google.com | 443  | TLSv1.3 | 172.217.168.238 |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.100  |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.101  |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.102  |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.113  |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.138  |         |
-| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 64.233.166.139  |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.100 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.101 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.102 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.113 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.138 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 142.251.173.139 |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 142.251.168.95  |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 142.251.173.95  |         |
-| PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 142.251.5.95    |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -182,7 +181,7 @@ SSL Connection Verification
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 74.125.133.95   |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 74.125.206.95   |         |
 | PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 74.125.71.95    |         |
-| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 64.233.167.95   |         |
+| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 66.102.1.95     |         |
 | PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 142.251.168.95  |         |
@@ -211,6 +210,7 @@ SSL Connection Verification
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 142.251.168.95  |         |
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 142.251.173.95  |         |
+| PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 142.251.5.95    |         |
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -234,6 +234,7 @@ SSL Connection Verification
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 142.251.168.95  |         |
+| PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |         gcr-io.googleapis.com         | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -281,7 +282,6 @@ SSL Connection Verification
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -294,7 +294,6 @@ SSL Connection Verification
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 142.251.168.95  |         |
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 142.251.173.95  |         |
-| PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 142.251.5.95    |         |
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -306,7 +305,6 @@ SSL Connection Verification
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 142.251.5.95    |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 64.233.166.95   |         |
@@ -316,14 +314,11 @@ SSL Connection Verification
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 74.125.133.95   |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 74.125.206.95   |         |
 | PASS |       k8s-gcr-io.googleapis.com       | 443  | TLSv1.3 | 74.125.71.95    |         |
-| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.32.174  |         |
-| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.34.174  |         |
-| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.36.174  |         |
-| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.38.174  |         |
+| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 66.102.1.95     |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 142.251.173.95  |         |
+| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 142.251.5.95    |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -332,11 +327,10 @@ SSL Connection Verification
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 74.125.133.95   |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 74.125.206.95   |         |
 | PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 74.125.71.95    |         |
-| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 64.233.167.95   |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 74.125.133.95   |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -360,7 +354,6 @@ SSL Connection Verification
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -395,7 +388,6 @@ SSL Connection Verification
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 108.177.15.95   |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 142.250.110.95  |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 142.251.168.95  |         |
-| PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 142.251.173.95  |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 173.194.76.95   |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 64.233.166.95   |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 64.233.167.95   |         |
@@ -404,20 +396,60 @@ SSL Connection Verification
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 74.125.133.95   |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 74.125.206.95   |         |
 | PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 74.125.71.95    |         |
-| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 172.253.120.95  |         |
-| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 74.125.140.95   |         |
-| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 172.253.120.207 |         |
-| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 74.125.140.207  |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 108.177.15.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 142.250.110.95  |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 142.251.168.95  |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 142.251.173.95  |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 173.194.76.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 64.233.166.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 64.233.167.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 64.233.184.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 66.102.1.95     |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 74.125.133.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 74.125.206.95   |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 74.125.71.95    |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 108.177.15.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 142.250.110.207 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 142.251.168.207 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 142.251.173.207 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 173.194.76.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 64.233.166.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 64.233.167.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 64.233.184.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 66.102.1.207    |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 74.125.133.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 74.125.206.207  |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 74.125.71.207   |         |
 | PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.32.223  |         |
 | PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.34.223  |         |
 | PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.36.223  |         |
 | PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.38.223  |         |
-| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 172.253.120.95  |         |
-| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 74.125.140.95   |         |
-| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 172.253.120.95  |         |
-| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 74.125.140.95   |         |
-| PASS |                 gcr.io                | 443  | TLSv1.3 | 74.125.140.82   |         |
-| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 74.125.140.82   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 108.177.15.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 142.250.110.95  |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 142.251.168.95  |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 142.251.173.95  |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 173.194.76.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 64.233.166.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 64.233.167.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 64.233.184.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 66.102.1.95     |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 74.125.133.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 74.125.206.95   |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 74.125.71.95    |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 108.177.15.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 142.250.110.95  |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 142.251.168.95  |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 142.251.173.95  |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 173.194.76.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 64.233.166.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 64.233.167.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 64.233.184.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 66.102.1.95     |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 74.125.133.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 74.125.206.95   |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 74.125.71.95    |         |
+| PASS |                 gcr.io                | 443  | TLSv1.3 | 64.233.184.82   |         |
+| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 74.125.206.82   |         |
 +------+---------------------------------------+------+---------+-----------------+---------+
 
 Qbone Connection Verification

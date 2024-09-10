@@ -71,7 +71,7 @@ class SiteDiscoveryTool:
         dns could be None if not detected
         :return: None. result are saved to self.localNetwork
         """
-        self.localNetwork = {'ip': None, 'gw': None, 'dns': None}
+        self.localNetwork = {'ip': None, 'gw': None, 'dns': None, 'intf_name': None}
         # Windows PowerShell
         if self.shType == 'powershell':
             # Get the IPv4 default gateway.
@@ -81,7 +81,7 @@ class SiteDiscoveryTool:
             r.cmd = f'{self.shPath} -F {ps1}'
             try:
                 r.response = os.popen(r.cmd).read()
-                gw, ip, dns_svr = r.response.splitlines()
+                gw, ip, dns_svr, intf_name = r.response.splitlines()
                 r.bOK = True
                 self.log_result(r)
             except:
@@ -95,6 +95,7 @@ class SiteDiscoveryTool:
                 self.localNetwork['ip'] = ip
             if is_ipv4_unicast(dns_svr):
                 self.localNetwork['dns'] = dns_svr
+            self.localNetwork['intf_name'] = intf_name
         # Linux Bash
         elif self.shType == 'bash':
             # check 'netstat', 'route', or 'ip' command
@@ -138,6 +139,8 @@ class SiteDiscoveryTool:
                     self.localNetwork['gw'] = res['via']
                 if 'src' in res.keys():
                     self.localNetwork['ip'] = res['src']
+                if 'dev' in res.keys():
+                    self.localNetwork['intf_name'] = res['dev']
             elif shutil.which('netstat') or shutil.which('route'):
                 # $ route -n
                 # Kernel IP routing table
@@ -160,7 +163,11 @@ class SiteDiscoveryTool:
                 # pick up the line whose Flags is 'UG'
                 res = [x for x in res if x.split()[3] == 'UG']
                 if len(res):
-                    self.localNetwork['gw'] = res[0].split()[1]
+                    tokens = res[0].split()
+                    if len(tokens) > 1:
+                        self.localNetwork['gw'] = tokens[1]
+                    if len(tokens) > 7:
+                        self.localNetwork['intf_name'] = tokens[7]
                     r3.bOK = True
                 self.log_result(r3)
 
@@ -356,8 +363,13 @@ class SiteDiscoveryTool:
 
     def print_local_network_table(self):
         table = PrettyTable()
-        table.field_names = ["Local IP", "Gateway", "Local DNS"]
-        table.add_row([self.localNetwork['ip'], self.localNetwork['gw'], self.localNetwork['dns']])
+        table.field_names = ["Interface", "Local IP", "Gateway", "Local DNS"]
+        table.add_row([
+            self.localNetwork['intf_name'],
+            self.localNetwork['ip'],
+            self.localNetwork['gw'],
+            self.localNetwork['dns']
+        ])
         print('Host Network Config', file=self.reporter)
         print(table, file=self.reporter)
         print('', file=self.reporter)

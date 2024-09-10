@@ -304,7 +304,7 @@ def verify_ssl_connection(host: str, port: int, ip: str = None) -> VerifyResults
     ret.cmd = f'use ssl to connect {host}:{port}'
     ret.abstracts['host'] = host
     ret.abstracts['port'] = port
-    ret.abstracts['proto'] = 'SSL'
+    ret.abstracts['proto'] = 'UNKNOWN'
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5)
     context = ssl.create_default_context()
