@@ -21,7 +21,8 @@ rm -f ./siteDiscovery.spec
 
 # build to one exe file
 pyinstaller --clean --noconfirm --onefile main.py \
-  --add-data playbook.yaml:. --add-data artifacts:artifacts \
+  --add-data playbook.yaml:. --add-data dns_map.csv:. \
+  --add-data iprr.csv:. --add-data artifacts:artifacts \
   --name siteDiscovery \
 
 chmod +x ./dist/siteDiscovery

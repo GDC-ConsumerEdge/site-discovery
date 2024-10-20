@@ -32,11 +32,29 @@ def main():
         help="""report directory. Default is the current working directory.
         report file name is 'site-discovery-report_<timestamp>.txt'. timestamp = YYYYmmDD-HHMMSS"""
     )
+    parser.add_argument(
+        "-m",
+        "--dns_mapper",
+        type=str,
+        default=os.path.join(proj_dir, 'dns_map.csv'),
+        help="""DNS name mapper file. Binding regular GCP API endpoints to GDC-C specific ones. 
+        Default is 'dns_map.csv' in the installation directory"""
+    )
+    parser.add_argument(
+        "-a",
+        "--iprr",
+        type=str,
+        default=os.path.join(proj_dir, 'iprr.csv'),
+        help="""API IP address range file. Resolved endpoint IPv4 address should be in this range. 
+        Default is 'iprr.csv' in the installation directory"""
+    )
     args = parser.parse_args()
     config_dict = {
         'playbook': args.file,
         'log_dir': args.log_dir,
-        'report_dir': args.report_dir
+        'report_dir': args.report_dir,
+        'dns_mapper': args.dns_mapper,
+        'iprr': args.iprr
     }
 
     # Create tool instances
@@ -79,6 +97,22 @@ def main():
             return
     print('OK')
     # print(tool.playbook)
+
+    # load dns mapping file
+    print(f"Loading DNS mapping file {config_dict['dns_mapper']} ...", end='')
+    if not tool.load_dns_mapper(config_dict['dns_mapper']):
+        print('NOK.')
+        print(f"Invalid DNS mapping file {config_dict['dns_mapper']}!")
+        return
+    print('OK')
+
+    # load network ranges file
+    print(f"Loading IP Address range (IPRR) file {config_dict['iprr']} ...", end='')
+    if not tool.load_ip_address_ranges(config_dict['iprr']):
+        print('NOK.')
+        print(f"Invalid IP Address range (IPRR) file {config_dict['iprr']}!")
+        return
+    print('OK')
 
     # get local network config
     print('Getting local network config ... ', end='')

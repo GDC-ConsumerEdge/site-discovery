@@ -62,20 +62,22 @@ python3 main.py --file your_playbook.yaml
 Playbook exmaple is [here](playbook.yaml)
 ## Example outputs
 The script will generate two text files
-- [report file](site-discovery-report_20240705-203910.txt) - connection validation for each endpoints in the playbook file
-- [log file](site-discovery.log) - more detailed record of the test steps, e.g. the command sent to endpoints, and the response received back from the endpoints
+- [report file](site-discovery-report.example.txt) - connection validation for each endpoints in the playbook file
+- [log file](site-discovery.example.log) - more detailed record of the test steps, e.g. the command sent to endpoints, and the response received back from the endpoints
 ```
-$ python3 main.py
+(.venv) danielxia@danielxia-1:~/PycharmProjects/siteDiscovery/release/alpha$ ./siteDiscovery 
 System shell path is /usr/bin/bash
-[INFO]log file /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/site-discovery.log
-[INFO]report file /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/site-discovery-report_20240705-165135.txt
-Loading Playbook /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/playbook.yaml ...OK
+[INFO]log file /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/release/alpha/site-discovery.log
+[INFO]report file /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/release/alpha/site-discovery-report_20241020-195123.txt
+Loading Playbook /tmp/_MEIJ7ql9w/playbook.yaml ...OK
+Loading DNS mapping file /tmp/_MEIJ7ql9w/dns_map.csv ...OK
+Loading IP Address range (IPRR) file /tmp/_MEIJ7ql9w/iprr.csv ...OK
 Getting local network config ... NOK
 Verify default gateway ... NOK
 Verifying DNS Servers ... OK
 Verifying NTP Servers ... OK
-Verifying TCP connections ... 23/23
-Verifying SSL connections ... 32/32
+Verifying TCP connections ... 29/29
+Verifying SSL connections ... 29/29
 Verifying QBONE connections ... 40/40
-Write report to /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/site-discovery-report_20240705-165135.txt ... Done
+Write report to /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/release/alpha/site-discovery-report_20241020-195123.txt ... Done
 ```

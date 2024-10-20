@@ -2,6 +2,7 @@ import platform
 import os
 import re
 import shutil
+import csv
 from typing import TextIO
 from datetime import datetime
 from time import ctime
@@ -47,6 +48,65 @@ class VerifyResults:
     cmd: str = ''
     response: str = ''
     abstracts: dict = field(default_factory=lambda: {})
+
+
+class GdceDnsMap:
+    wildcard_map = {}
+    regular_map = {}
+
+    def __init__(self, map_csv_file):
+        with open(map_csv_file, 'r') as f:
+            lines = csv.reader(f, skipinitialspace=True)
+            for x, y in lines:
+                x = x.lower()
+                y = y.lower()
+                x_star_count = x.count('*')
+                y_star_count = y.count('*')
+                if x_star_count == 0 and y_star_count == 0:
+                    self.regular_map[x] = y
+                elif x_star_count > 1 or x_star_count > 1:
+                    raise ValueError(f'Cannot have more than one wildcard in dns names: [{x},{y}]')
+                elif x_star_count != y_star_count:
+                    raise ValueError(f'Wildcard dns name must match: [{x},{y}]')
+                elif x.startswith('*') and y.startswith('*'):
+                    self.wildcard_map[x] = y
+                else:
+                    raise ValueError(f'Wildcard must be at the beginning of the dns name: [{x},{y}]')
+
+    def map_dns(self, dns_name: str) -> str:
+        dns_name = dns_name.lower()
+        if dns_name in self.regular_map:
+            return self.regular_map[dns_name]
+        else:
+            for k in self.wildcard_map.keys():
+                g = re.fullmatch(k.replace('.', r'\.').replace('*', r'([\.\w]+)'), dns_name)
+                if g:
+                    return self.wildcard_map[k].replace('*', g[1])
+            return dns_name
+
+    def search_name(self, dns_name: str) -> str | None:
+        dns_name = dns_name.lower()
+        if dns_name in self.regular_map.keys():
+            return 'KEYS'
+        elif dns_name in self.regular_map.values():
+            return 'VALUES'
+        else:
+            return None
+
+
+class GdceIpNetRanges:
+    def __init__(self, iprr_csv_file):
+        with open(iprr_csv_file, 'r') as f:
+            self.net_ranges = [ipaddress.ip_network(r[0].strip()) for r in csv.reader(f)]
+
+    def is_in_range(self, ip_str: str) -> bool:
+        try:
+            ip = ipaddress.ip_address(ip_str)
+            for net in self.net_ranges:
+                if ip in net:
+                    return True
+        except:
+            return False
 
 
 def is_ipv4_unicast(ip_str: str) -> bool:

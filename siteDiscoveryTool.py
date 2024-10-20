@@ -1,5 +1,6 @@
 import sys
 import yaml
+import csv
 import dns.resolver
 from prettytable import PrettyTable
 from utils import *
@@ -51,6 +52,8 @@ class SiteDiscoveryTool:
             raise
         self.artefactDir = os.path.join(self.projDir, 'artifacts', self.shType)
         self.playbook = {}
+        self.dns_mapper: GdceDnsMap | None = None
+        self.iprr: GdceIpNetRanges | None = None
         self.localNetwork = {}
         self.results = {}
         self.dns_svr_lst = []
@@ -61,6 +64,20 @@ class SiteDiscoveryTool:
         try:
             self.playbook = yaml.safe_load(file_stream)
             # yaml.safe_dump(self.playbook, sort_keys=False)
+        except:
+            return False
+        return True
+
+    def load_dns_mapper(self, file_name: str) -> bool:
+        try:
+            self.dns_mapper = GdceDnsMap(file_name)
+        except:
+            return False
+        return True
+
+    def load_ip_address_ranges(self, file_name: str) -> str:
+        try:
+            self.iprr = GdceIpNetRanges(file_name)
         except:
             return False
         return True
@@ -202,16 +219,14 @@ class SiteDiscoveryTool:
 
     def _get_dns_svr_list(self):
         dns_svr_lst = []
-        # print(f'===>0. self.playbook.keys() = {self.playbook.keys()}')
         if 'dns' in self.playbook.keys():
             dns_svr_lst += self.playbook['dns']
-        else:
-            dns_svr_lst |= ['8.8.8.8', '8.8.4.4']
-        # print(f'===>1. dns_svr_lst = {dns_svr_lst}')
         if self.localNetwork['dns'] is not None:
             if self.localNetwork['dns'] not in dns_svr_lst:
                 dns_svr_lst.append(self.localNetwork['dns'])
-        # print(f'===>2. dns_svr_lst = {dns_svr_lst}')
+        # if no DNS server is configured nor configured/detect, using google dns servers
+        if len(dns_svr_lst) == 0:
+            dns_svr_lst = ['8.8.8.8', '8.8.4.4']
         self.dns_svr_lst = dns_svr_lst
 
     def verify_playbook_dns(self) -> bool:
@@ -285,24 +300,34 @@ class SiteDiscoveryTool:
             for i, line in enumerate(self.playbook[proto]):
                 print(f'\rVerifying {proto.upper()} connections ... {i+1}/{total}', end='')
                 try:
-                    host, port = line.split(':')
+                    ori_host, port = line.split(':')
                     port = int(port)
                 except:
                     continue
+                # check if this host is bind to GDC endpoionts
+                host = self.dns_mapper.map_dns(ori_host)
+                if host != ori_host.lower():
+                    # this generic google endpoint is mapped to gdc endpoint
+                    res2 = VerifyResults(bOK=True, cmd=f'Rewrite endpoint {ori_host}', response=host)
+                    self.log_result(res2)
                 res = resolve_dns(host=host, dns_svr_lst=self.dns_svr_lst)
                 self.log_result(res)
                 if res.bOK:
                     for ip in res.abstracts['ip']:
                         if proto == 'tcp':
                             con = verify_tcp_connection(ip, port)
-                            con.abstracts['host'] = host
+                            con.abstracts['host'] = ori_host
                         else:
-                            con = verify_ssl_connection(host, port, ip)
+                            con = verify_ssl_connection(ori_host, port, ip)
+                        # check if ip address is in the IPRR range
+                        if con.bOK and (not self.iprr.is_in_range(ip)):
+                            con.bOK = False
+                            con.errReason = 'Not in IPRR range'
                         self.log_result(con)
                         self.results[proto].append(con)
                 else:
                     con = VerifyResults()
-                    con.abstracts['host'] = host
+                    con.abstracts['host'] = ori_host
                     con.abstracts['proto'] = proto.upper()
                     con.abstracts['port'] = port
                     con.errReason = 'DNS Error'
