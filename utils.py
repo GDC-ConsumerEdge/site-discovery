@@ -97,16 +97,36 @@ class GdceDnsMap:
 class GdceIpNetRanges:
     def __init__(self, iprr_csv_file):
         with open(iprr_csv_file, 'r') as f:
-            self.net_ranges = [ipaddress.ip_network(r[0].strip()) for r in csv.reader(f)]
+            self.net_ranges = [{
+                'net_str': r[0],
+                'net': ipaddress.ip_network(r[0]),
+                'tested': False
+            } for r in csv.reader(f, skipinitialspace=True)]
 
     def is_in_range(self, ip_str: str) -> bool:
         try:
             ip = ipaddress.ip_address(ip_str)
-            for net in self.net_ranges:
-                if ip in net:
+            for net_range in self.net_ranges:
+                if ip in net_range['net']:
                     return True
         except:
             return False
+
+    def record_tested_net(self, ip_str: str) -> bool:
+        ret = False
+        try:
+            ip = ipaddress.ip_address(ip_str)
+        except:
+            return ret
+        for net_range in self.net_ranges:
+            if ip in net_range['net']:
+                net_range['tested'] = True
+                ret = True
+        return ret
+
+    def clear_tested_net(self):
+        for net_range in self.net_ranges:
+            net_range['tested'] = False
 
 
 def is_ipv4_unicast(ip_str: str) -> bool:

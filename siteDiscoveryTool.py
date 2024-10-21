@@ -270,6 +270,7 @@ class SiteDiscoveryTool:
                         ntp_res = verify_ntp(ntp_svr=ntp, svr_ip=ip)
                         self.log_result(ntp_res)
                         self.results['ntp'].append(ntp_res)
+                        self.iprr.record_tested_net(ip)
                 else:
                     ntp_res = VerifyResults()
                     ntp_res.bOK = False
@@ -325,6 +326,7 @@ class SiteDiscoveryTool:
                             con.errReason = 'Not in IPRR range'
                         self.log_result(con)
                         self.results[proto].append(con)
+                        self.iprr.record_tested_net(ip)
                 else:
                     con = VerifyResults()
                     con.abstracts['host'] = ori_host
@@ -352,6 +354,8 @@ class SiteDiscoveryTool:
             con = verify_quic_connection(host, port)
             self.log_result(con)
             self.results[proto].append(con)
+            for ip_str in con.abstracts['ip']:
+                self.iprr.record_tested_net(ip_str)
         print(f'\rVerifying {proto.upper()} connections ... {total}/{total}')
 
     def bind_logger(self, logger: Logger):
@@ -382,9 +386,10 @@ class SiteDiscoveryTool:
         self.print_dns_table()
         self.print_ntp_table()
         self.print_session_table('tcp')
-        self.print_session_table('udp')
+        # self.print_session_table('udp')
         self.print_session_table('ssl')
         self.print_qbone_table()
+        self.print_iprr_table()
 
     def print_local_network_table(self):
         table = PrettyTable()
@@ -497,3 +502,13 @@ class SiteDiscoveryTool:
         print(table, file=self.reporter)
         print('', file=self.reporter)
 
+    def print_iprr_table(self):
+        table = PrettyTable()
+        table.field_names = ['IPRR Network Range', "Test Covered"]
+        for net_range in self.iprr.net_ranges:
+            table.add_row([net_range['net_str'], net_range['tested']])
+        print(f'IPRR Network Range Coverage', file=self.reporter)
+        table.align["IPRR Network Range"] = "l"
+        table.align["Test Covered"] = "c"
+        print(table, file=self.reporter)
+        print('', file=self.reporter)

@@ -1,0 +1,3045 @@
+============================================================
+[2024-10-21 18:59:44]------------------------------------------------------------
+<cmd>ip route show 0.0.0.0/0
+<pass/fail> PASS
+<response>default via 172.28.104.1 dev ens4 proto dhcp src 172.28.106.147 metric 100
+
+<error>
+<extra>{}
+[2024-10-21 18:59:44]------------------------------------------------------------
+<cmd>dns.resolver.Resolver().nameservers
+<pass/fail> FAIL
+<response>['127.0.0.1']
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: qbone-us-east1.google.com, Server: ['8.8.8.8'], Port: 53(UDP)
+<pass/fail> PASS
+<response>192.178.19.34
+192.178.18.34
+<error>
+<extra>{'host': 'qbone-us-east1.google.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8'], 'ip': ['192.178.18.34', '192.178.19.34']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: qbone-us-east1.google.com, Server: ['8.8.8.8'], Port: 53(TCP)
+<pass/fail> PASS
+<response>192.178.18.34
+192.178.19.34
+<error>
+<extra>{'host': 'qbone-us-east1.google.com', 'port': 53, 'proto': 'TCP', 'dns': ['8.8.8.8'], 'ip': ['192.178.18.34', '192.178.19.34']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: qbone-us-east1.google.com, Server: ['8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>192.178.19.34
+192.178.18.34
+<error>
+<extra>{'host': 'qbone-us-east1.google.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.4.4'], 'ip': ['192.178.18.34', '192.178.19.34']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: qbone-us-east1.google.com, Server: ['8.8.4.4'], Port: 53(TCP)
+<pass/fail> PASS
+<response>192.178.19.34
+192.178.18.34
+<error>
+<extra>{'host': 'qbone-us-east1.google.com', 'port': 53, 'proto': 'TCP', 'dns': ['8.8.4.4'], 'ip': ['192.178.18.34', '192.178.19.34']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: time.google.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.35.0
+216.239.35.8
+216.239.35.4
+216.239.35.12
+<error>
+<extra>{'host': 'time.google.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.35.0', '216.239.35.12', '216.239.35.4', '216.239.35.8']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>ntplib.NTPClient.request(time.google.com<216.239.35.0>, version=4)
+<pass/fail> PASS
+<response>Mon Oct 21 18:59:46 2024
+<error>
+<extra>{'ntp_svr': 'time.google.com', 'ntp_svr_ip': '216.239.35.0', 'tx_time': 'Mon Oct 21 18:59:46 2024', 'offset': -0.00023245811462402344, 'root_delay': 0.0}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>ntplib.NTPClient.request(time.google.com<216.239.35.12>, version=4)
+<pass/fail> PASS
+<response>Mon Oct 21 18:59:46 2024
+<error>
+<extra>{'ntp_svr': 'time.google.com', 'ntp_svr_ip': '216.239.35.12', 'tx_time': 'Mon Oct 21 18:59:46 2024', 'offset': -9.250640869140625e-05, 'root_delay': 0.0}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>ntplib.NTPClient.request(time.google.com<216.239.35.4>, version=4)
+<pass/fail> PASS
+<response>Mon Oct 21 18:59:46 2024
+<error>
+<extra>{'ntp_svr': 'time.google.com', 'ntp_svr_ip': '216.239.35.4', 'tx_time': 'Mon Oct 21 18:59:46 2024', 'offset': -0.0007624626159667969, 'root_delay': 0.0}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>ntplib.NTPClient.request(time.google.com<216.239.35.8>, version=4)
+<pass/fail> PASS
+<response>Mon Oct 21 18:59:46 2024
+<error>
+<extra>{'ntp_svr': 'time.google.com', 'ntp_svr_ip': '216.239.35.8', 'tx_time': 'Mon Oct 21 18:59:46 2024', 'offset': 0.00030684471130371094, 'root_delay': 0.0}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint accounts.google.com
+<pass/fail> PASS
+<response>accounts.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: accounts.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'accounts.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint alt1-cache-management-prod.google.com
+<pass/fail> PASS
+<response>alt1-cache-management-prod.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: alt1-cache-management-prod.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.32.223
+216.239.34.223
+216.239.36.223
+<error>
+<extra>{'host': 'alt1-cache-management-prod.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint cache-management-prod.google.com
+<pass/fail> PASS
+<response>cache-management-prod.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: cache-management-prod.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.36.223
+216.239.34.223
+<error>
+<extra>{'host': 'cache-management-prod.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint cloudresourcemanager.googleapis.com
+<pass/fail> PASS
+<response>cloudresourcemanager.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: cloudresourcemanager.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.32.223
+216.239.34.223
+<error>
+<extra>{'host': 'cloudresourcemanager.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint compute.googleapis.com
+<pass/fail> PASS
+<response>compute.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: compute.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'compute.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint connectgateway.googleapis.com
+<pass/fail> PASS
+<response>connectgateway.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: connectgateway.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.38.223
+216.239.32.223
+216.239.34.223
+<error>
+<extra>{'host': 'connectgateway.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint containerregistry.googleapis.com
+<pass/fail> PASS
+<response>containerregistry.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: containerregistry.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'containerregistry.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint edgecontainer.googleapis.com
+<pass/fail> PASS
+<response>edgecontainer.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: edgecontainer.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.36.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'edgecontainer.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint edgenetwork.googleapis.com
+<pass/fail> PASS
+<response>edgenetwork.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: edgenetwork.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'edgenetwork.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeconnect.googleapis.com
+<pass/fail> PASS
+<response>gkeconnect.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gkeconnect.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.36.223
+216.239.32.223
+<error>
+<extra>{'host': 'gkeconnect.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint gkehub.googleapis.com
+<pass/fail> PASS
+<response>gkehub.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gkehub.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.34.223
+216.239.36.223
+<error>
+<extra>{'host': 'gkehub.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeonprem.googleapis.com
+<pass/fail> PASS
+<response>gkeonprem.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gkeonprem.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.36.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'gkeonprem.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint iam.googleapis.com
+<pass/fail> PASS
+<response>iam.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: iam.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.34.223
+216.239.36.223
+<error>
+<extra>{'host': 'iam.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint iamcredentials.googleapis.com
+<pass/fail> PASS
+<response>iamcredentials.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: iamcredentials.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.32.223
+216.239.34.223
+<error>
+<extra>{'host': 'iamcredentials.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint logging.googleapis.com
+<pass/fail> PASS
+<response>logging.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: logging.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.36.223
+216.239.32.223
+<error>
+<extra>{'host': 'logging.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint monitoring.googleapis.com
+<pass/fail> PASS
+<response>monitoring.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: monitoring.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.36.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'monitoring.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeonprem.mtls.googleapis.com
+<pass/fail> PASS
+<response>gkeonprem.mtls.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gkeonprem.mtls.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.38.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'gkeonprem.mtls.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint oauth2.googleapis.com
+<pass/fail> PASS
+<response>oauth2.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: oauth2.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.38.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'oauth2.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint opsconfigmonitoring.googleapis.com
+<pass/fail> PASS
+<response>opsconfigmonitoring.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: opsconfigmonitoring.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'opsconfigmonitoring.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint securetoken.googleapis.com
+<pass/fail> PASS
+<response>securetoken.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: securetoken.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'securetoken.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint servicecontrol.googleapis.com
+<pass/fail> PASS
+<response>servicecontrol.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: servicecontrol.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.36.223
+216.239.34.223
+<error>
+<extra>{'host': 'servicecontrol.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint serviceusage.googleapis.com
+<pass/fail> PASS
+<response>serviceusage.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: serviceusage.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'serviceusage.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint stackdriver.googleapis.com
+<pass/fail> PASS
+<response>stackdriver.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: stackdriver.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.32.223
+216.239.36.223
+216.239.34.223
+<error>
+<extra>{'host': 'stackdriver.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint storage.googleapis.com
+<pass/fail> PASS
+<response>storage.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: storage.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.32.223
+216.239.34.223
+<error>
+<extra>{'host': 'storage.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gmec-ipxe.storage.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.32.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint sts.googleapis.com
+<pass/fail> PASS
+<response>sts.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: sts.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.34.223
+216.239.36.223
+<error>
+<extra>{'host': 'sts.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint www.googleapis.com
+<pass/fail> PASS
+<response>www.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: www.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'www.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint gcr.io
+<pass/fail> PASS
+<response>gcr-io.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: gcr-io.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.36.223
+216.239.38.223
+216.239.32.223
+<error>
+<extra>{'host': 'gcr-io.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint k8s.gcr.io
+<pass/fail> PASS
+<response>k8s-gcr-io.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: k8s-gcr-io.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.34.223
+216.239.38.223
+216.239.32.223
+<error>
+<extra>{'host': 'k8s-gcr-io.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.32.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.34.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.36.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use socket to connect 216.239.38.223:443(TCP)
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'proto': 'TCP', 'port': 443, 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint accounts.google.com
+<pass/fail> PASS
+<response>accounts.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: accounts.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'accounts.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect accounts.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect accounts.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect accounts.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect accounts.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'accounts.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint alt1-cache-management-prod.google.com
+<pass/fail> PASS
+<response>alt1-cache-management-prod.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: alt1-cache-management-prod.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'alt1-cache-management-prod.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect alt1-cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect alt1-cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect alt1-cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect alt1-cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'alt1-cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint cache-management-prod.google.com
+<pass/fail> PASS
+<response>cache-management-prod.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: cache-management-prod.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.36.223
+216.239.38.223
+216.239.32.223
+<error>
+<extra>{'host': 'cache-management-prod.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cache-management-prod.google.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cache-management-prod.google.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>Rewrite endpoint cloudresourcemanager.googleapis.com
+<pass/fail> PASS
+<response>cloudresourcemanager.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>DNS lookup: cloudresourcemanager.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'cloudresourcemanager.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cloudresourcemanager.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:46]------------------------------------------------------------
+<cmd>use ssl to connect cloudresourcemanager.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect cloudresourcemanager.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect cloudresourcemanager.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'cloudresourcemanager.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint compute.googleapis.com
+<pass/fail> PASS
+<response>compute.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: compute.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.38.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'compute.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect compute.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect compute.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect compute.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect compute.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'compute.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint connectgateway.googleapis.com
+<pass/fail> PASS
+<response>connectgateway.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: connectgateway.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'connectgateway.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect connectgateway.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect connectgateway.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect connectgateway.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect connectgateway.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'connectgateway.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint containerregistry.googleapis.com
+<pass/fail> PASS
+<response>containerregistry.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: containerregistry.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.34.223
+216.239.38.223
+216.239.32.223
+<error>
+<extra>{'host': 'containerregistry.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect containerregistry.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect containerregistry.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect containerregistry.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect containerregistry.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'containerregistry.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint edgecontainer.googleapis.com
+<pass/fail> PASS
+<response>edgecontainer.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: edgecontainer.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.32.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'edgecontainer.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgecontainer.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgecontainer.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgecontainer.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgecontainer.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgecontainer.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint edgenetwork.googleapis.com
+<pass/fail> PASS
+<response>edgenetwork.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: edgenetwork.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'edgenetwork.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgenetwork.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgenetwork.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgenetwork.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect edgenetwork.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'edgenetwork.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeconnect.googleapis.com
+<pass/fail> PASS
+<response>gkeconnect.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: gkeconnect.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.32.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'gkeconnect.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeconnect.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeconnect.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeconnect.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeconnect.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeconnect.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint gkehub.googleapis.com
+<pass/fail> PASS
+<response>gkehub.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: gkehub.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.38.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'gkehub.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkehub.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkehub.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkehub.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkehub.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkehub.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeonprem.googleapis.com
+<pass/fail> PASS
+<response>gkeonprem.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: gkeonprem.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'gkeonprem.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint iam.googleapis.com
+<pass/fail> PASS
+<response>iam.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: iam.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.38.223
+216.239.34.223
+<error>
+<extra>{'host': 'iam.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iam.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iam.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iam.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iam.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iam.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint iamcredentials.googleapis.com
+<pass/fail> PASS
+<response>iamcredentials.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: iamcredentials.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'iamcredentials.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iamcredentials.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iamcredentials.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iamcredentials.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect iamcredentials.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'iamcredentials.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint logging.googleapis.com
+<pass/fail> PASS
+<response>logging.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: logging.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'logging.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect logging.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect logging.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect logging.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect logging.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'logging.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint monitoring.googleapis.com
+<pass/fail> PASS
+<response>monitoring.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: monitoring.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.32.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'monitoring.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect monitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect monitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect monitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect monitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'monitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint gkeonprem.mtls.googleapis.com
+<pass/fail> PASS
+<response>gkeonprem.mtls.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: gkeonprem.mtls.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'gkeonprem.mtls.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.mtls.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.mtls.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.mtls.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect gkeonprem.mtls.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gkeonprem.mtls.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint oauth2.googleapis.com
+<pass/fail> PASS
+<response>oauth2.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: oauth2.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.32.223
+216.239.38.223
+216.239.36.223
+<error>
+<extra>{'host': 'oauth2.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect oauth2.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect oauth2.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect oauth2.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect oauth2.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'oauth2.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint opsconfigmonitoring.googleapis.com
+<pass/fail> PASS
+<response>opsconfigmonitoring.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: opsconfigmonitoring.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.34.223
+216.239.36.223
+<error>
+<extra>{'host': 'opsconfigmonitoring.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect opsconfigmonitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect opsconfigmonitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect opsconfigmonitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>use ssl to connect opsconfigmonitoring.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'opsconfigmonitoring.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>Rewrite endpoint securetoken.googleapis.com
+<pass/fail> PASS
+<response>securetoken.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:47]------------------------------------------------------------
+<cmd>DNS lookup: securetoken.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.36.223
+216.239.32.223
+<error>
+<extra>{'host': 'securetoken.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect securetoken.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect securetoken.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect securetoken.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect securetoken.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'securetoken.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint servicecontrol.googleapis.com
+<pass/fail> PASS
+<response>servicecontrol.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: servicecontrol.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.38.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'servicecontrol.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect servicecontrol.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect servicecontrol.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect servicecontrol.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect servicecontrol.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'servicecontrol.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint serviceusage.googleapis.com
+<pass/fail> PASS
+<response>serviceusage.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: serviceusage.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.32.223
+216.239.34.223
+216.239.38.223
+<error>
+<extra>{'host': 'serviceusage.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect serviceusage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect serviceusage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect serviceusage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect serviceusage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'serviceusage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint stackdriver.googleapis.com
+<pass/fail> PASS
+<response>stackdriver.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: stackdriver.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.36.223
+216.239.34.223
+216.239.38.223
+216.239.32.223
+<error>
+<extra>{'host': 'stackdriver.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect stackdriver.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect stackdriver.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect stackdriver.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect stackdriver.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'stackdriver.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint storage.googleapis.com
+<pass/fail> PASS
+<response>storage.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: storage.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.36.223
+216.239.34.223
+216.239.32.223
+<error>
+<extra>{'host': 'storage.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: gmec-ipxe.storage.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gmec-ipxe.storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gmec-ipxe.storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gmec-ipxe.storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gmec-ipxe.storage.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gmec-ipxe.storage.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint sts.googleapis.com
+<pass/fail> PASS
+<response>sts.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: sts.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.38.223
+216.239.36.223
+216.239.34.223
+<error>
+<extra>{'host': 'sts.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect sts.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect sts.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect sts.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect sts.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'sts.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint www.googleapis.com
+<pass/fail> PASS
+<response>www.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: www.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.34.223
+216.239.38.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'www.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect www.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect www.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect www.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect www.googleapis.com:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'www.googleapis.com', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint gcr.io
+<pass/fail> PASS
+<response>gcr-io.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: gcr-io.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.32.223
+216.239.34.223
+216.239.36.223
+216.239.38.223
+<error>
+<extra>{'host': 'gcr-io.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>Rewrite endpoint k8s.gcr.io
+<pass/fail> PASS
+<response>k8s-gcr-io.gdce.googleapis.com
+<error>
+<extra>{}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>DNS lookup: k8s-gcr-io.gdce.googleapis.com, Server: ['8.8.8.8', '8.8.4.4'], Port: 53(UDP)
+<pass/fail> PASS
+<response>216.239.38.223
+216.239.34.223
+216.239.32.223
+216.239.36.223
+<error>
+<extra>{'host': 'k8s-gcr-io.gdce.googleapis.com', 'port': 53, 'proto': 'UDP', 'dns': ['8.8.8.8', '8.8.4.4'], 'ip': ['216.239.32.223', '216.239.34.223', '216.239.36.223', '216.239.38.223']}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect k8s.gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.32.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect k8s.gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.34.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect k8s.gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.36.223'}
+[2024-10-21 18:59:48]------------------------------------------------------------
+<cmd>use ssl to connect k8s.gcr.io:443
+<pass/fail> PASS
+<response>
+<error>
+<extra>{'host': 'k8s.gcr.io', 'port': 443, 'proto': 'TLSv1.3', 'ip': '216.239.38.223'}
+[2024-10-21 18:59:50]------------------------------------------------------------
+<cmd>use quic to connect qbone-africa-south1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 18:59:48 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-africa-south1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.33', '192.178.19.33'], 'http_code': 404}
+[2024-10-21 18:59:53]------------------------------------------------------------
+<cmd>use quic to connect qbone-apac-2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 18:59:50 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-apac-2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.17', '192.178.19.17'], 'http_code': 404}
+[2024-10-21 18:59:56]------------------------------------------------------------
+<cmd>use quic to connect qbone-apac-3.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 18:59:54 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-apac-3.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.10', '192.178.19.10'], 'http_code': 404}
+[2024-10-21 18:59:59]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-east1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 18:59:57 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-east1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.10', '192.178.19.10'], 'http_code': 404}
+[2024-10-21 19:00:03]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-east2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:00 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-east2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.11', '192.178.19.11'], 'http_code': 404}
+[2024-10-21 19:00:05]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-northeast1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:03 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-northeast1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.12', '192.178.19.12'], 'http_code': 404}
+[2024-10-21 19:00:08]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-northeast2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:06 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-northeast2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.13', '192.178.19.13'], 'http_code': 404}
+[2024-10-21 19:00:12]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-south1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:08 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-south1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.15', '192.178.19.15'], 'http_code': 404}
+[2024-10-21 19:00:16]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-south2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:12 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-south2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.16', '192.178.19.16'], 'http_code': 404}
+[2024-10-21 19:00:19]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-southeast1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:16 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-southeast1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.17', '192.178.19.17'], 'http_code': 404}
+[2024-10-21 19:00:23]------------------------------------------------------------
+<cmd>use quic to connect qbone-asia-southeast2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:20 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-asia-southeast2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.4', '192.178.19.4'], 'http_code': 404}
+[2024-10-21 19:00:26]------------------------------------------------------------
+<cmd>use quic to connect qbone-australia-southeast1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:23 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-australia-southeast1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.18', '192.178.19.18'], 'http_code': 404}
+[2024-10-21 19:00:29]------------------------------------------------------------
+<cmd>use quic to connect qbone-australia-southeast2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:26 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-australia-southeast2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.19', '192.178.19.19'], 'http_code': 404}
+[2024-10-21 19:00:29]------------------------------------------------------------
+<cmd>use quic to connect qbone-emea-1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:29 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-emea-1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.21', '192.178.19.21'], 'http_code': 404}
+[2024-10-21 19:00:30]------------------------------------------------------------
+<cmd>use quic to connect qbone-emea-2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:30 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-emea-2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.5', '192.178.19.5'], 'http_code': 404}
+[2024-10-21 19:00:30]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-central2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:30 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-central2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.20', '192.178.19.20'], 'http_code': 404}
+[2024-10-21 19:00:31]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-north1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:30 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-north1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.5', '192.178.19.5'], 'http_code': 404}
+[2024-10-21 19:00:31]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-west1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:31 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-west1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.21', '192.178.19.21'], 'http_code': 404}
+[2024-10-21 19:00:31]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-west2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:31 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-west2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.22', '192.178.19.22'], 'http_code': 404}
+[2024-10-21 19:00:32]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-west3.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:31 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-west3.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.23', '192.178.19.23'], 'http_code': 404}
+[2024-10-21 19:00:32]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-west4.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:32 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-west4.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.24', '192.178.19.24'], 'http_code': 404}
+[2024-10-21 19:00:32]------------------------------------------------------------
+<cmd>use quic to connect qbone-europe-west6.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:32 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-europe-west6.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.25', '192.178.19.25'], 'http_code': 404}
+[2024-10-21 19:00:33]------------------------------------------------------------
+<cmd>use quic to connect qbone-me-west1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:32 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-me-west1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.26', '192.178.19.26'], 'http_code': 404}
+[2024-10-21 19:00:34]------------------------------------------------------------
+<cmd>use quic to connect qbone-northamerica-northeast1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:33 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-northamerica-northeast1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.6', '192.178.19.6'], 'http_code': 404}
+[2024-10-21 19:00:35]------------------------------------------------------------
+<cmd>use quic to connect qbone-northamerica-northeast2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:34 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-northamerica-northeast2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.27', '192.178.19.27'], 'http_code': 404}
+[2024-10-21 19:00:37]------------------------------------------------------------
+<cmd>use quic to connect qbone-southamerica-east1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:35 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-southamerica-east1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.28', '192.178.19.28'], 'http_code': 404}
+[2024-10-21 19:00:39]------------------------------------------------------------
+<cmd>use quic to connect qbone-southamerica-east1-ext1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:37 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-southamerica-east1-ext1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.28', '192.178.19.28'], 'http_code': 404}
+[2024-10-21 19:00:42]------------------------------------------------------------
+<cmd>use quic to connect qbone-southamerica-west1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:40 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-southamerica-west1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.1', '192.178.19.1'], 'http_code': 404}
+[2024-10-21 19:00:43]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-central1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:42 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-central1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.3', '192.178.19.3'], 'http_code': 404}
+[2024-10-21 19:00:44]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-central2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:43 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-central2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.29', '192.178.19.29'], 'http_code': 404}
+[2024-10-21 19:00:45]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-east-1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:44 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-east-1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.34', '192.178.19.34'], 'http_code': 404}
+[2024-10-21 19:00:47]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-east-2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:46 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-east-2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.30', '192.178.19.30'], 'http_code': 404}
+[2024-10-21 19:00:48]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-east-crash-1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:47 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-east-crash-1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.2', '192.178.19.2'], 'http_code': 404}
+[2024-10-21 19:00:49]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-east1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:48 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-east1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.34', '192.178.19.34'], 'http_code': 404}
+[2024-10-21 19:00:50]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-east4.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:49 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-east4.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.7', '192.178.19.7'], 'http_code': 404}
+[2024-10-21 19:00:51]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-west-1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:50 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-west-1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.8', '192.178.19.8'], 'http_code': 404}
+[2024-10-21 19:00:53]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-west1.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:52 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-west1.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.8', '192.178.19.8'], 'http_code': 404}
+[2024-10-21 19:00:55]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-west2.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:53 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-west2.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.9', '192.178.19.9'], 'http_code': 404}
+[2024-10-21 19:00:56]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-west3.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:55 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-west3.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.31', '192.178.19.31'], 'http_code': 404}
+[2024-10-21 19:00:58]------------------------------------------------------------
+<cmd>use quic to connect qbone-us-west4.google.com:443
+<pass/fail> PASS
+<response>:status: 404
+content-type: text/html; charset=UTF-8
+referrer-policy: no-referrer
+content-length: 1561
+date: Mon, 21 Oct 2024 19:00:56 GMT
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.goog
+<error>
+<extra>{'host': 'qbone-us-west4.google.com', 'port': 443, 'proto': 'QUIC', 'ip': ['192.178.18.32', '192.178.19.32'], 'http_code': 404}

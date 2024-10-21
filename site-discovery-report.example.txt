@@ -1,0 +1,339 @@
+Host Network Config
++-----------+----------------+--------------+-----------+
+| Interface |    Local IP    |   Gateway    | Local DNS |
++-----------+----------------+--------------+-----------+
+|    ens4   | 172.28.106.147 | 172.28.104.1 |    None   |
++-----------+----------------+--------------+-----------+
+
+Default Gateway Verification
++-----------------+------+--------------+
+| Default Gateway | Ping |     ARP      |
++-----------------+------+--------------+
+|   172.28.104.1  | FAIL | 4201ac1c6801 |
++-----------------+------+--------------+
+
+DNS Server Verification
++------+---------------+------+-------+---------------------------+
+| P/F  | DNS Server IP | Port | Proto | Target Hostname           |
++------+---------------+------+-------+---------------------------+
+| PASS | 8.8.8.8       |  53  |  UDP  | qbone-us-east1.google.com |
+| PASS | 8.8.8.8       |  53  |  TCP  | qbone-us-east1.google.com |
+| PASS | 8.8.4.4       |  53  |  UDP  | qbone-us-east1.google.com |
+| PASS | 8.8.4.4       |  53  |  TCP  | qbone-us-east1.google.com |
++------+---------------+------+-------+---------------------------+
+
+NTP Server Verification
++------+-----------------+---------------+--------------------------+---------+
+| P/F  |       Host      | Resolved IP   | TX Time                  | Err Msg |
++------+-----------------+---------------+--------------------------+---------+
+| PASS | time.google.com | 216.239.35.0  | Mon Oct 21 18:59:46 2024 |         |
+| PASS | time.google.com | 216.239.35.12 | Mon Oct 21 18:59:46 2024 |         |
+| PASS | time.google.com | 216.239.35.4  | Mon Oct 21 18:59:46 2024 |         |
+| PASS | time.google.com | 216.239.35.8  | Mon Oct 21 18:59:46 2024 |         |
++------+-----------------+---------------+--------------------------+---------+
+
+TCP Connection Verification
++------+---------------------------------------+------+-------+----------------+---------+
+| P/F  |                  Host                 | Port | Proto | Resolved IP    | Err Msg |
++------+---------------------------------------+------+-------+----------------+---------+
+| PASS |          accounts.google.com          | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |          accounts.google.com          | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |          accounts.google.com          | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |          accounts.google.com          | 443  |  TCP  | 216.239.38.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  |  TCP  | 216.239.32.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  |  TCP  | 216.239.34.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  |  TCP  | 216.239.36.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |         compute.googleapis.com        | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |         compute.googleapis.com        | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |         compute.googleapis.com        | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |         compute.googleapis.com        | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |           iam.googleapis.com          | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |           iam.googleapis.com          | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |           iam.googleapis.com          | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |           iam.googleapis.com          | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |         logging.googleapis.com        | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |         logging.googleapis.com        | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |         logging.googleapis.com        | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |         logging.googleapis.com        | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |         storage.googleapis.com        | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |         storage.googleapis.com        | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |         storage.googleapis.com        | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |         storage.googleapis.com        | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |           sts.googleapis.com          | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |           sts.googleapis.com          | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |           sts.googleapis.com          | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |           sts.googleapis.com          | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |           www.googleapis.com          | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |           www.googleapis.com          | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |           www.googleapis.com          | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |           www.googleapis.com          | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |                 gcr.io                | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |                 gcr.io                | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |                 gcr.io                | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |                 gcr.io                | 443  |  TCP  | 216.239.38.223 |         |
+| PASS |               k8s.gcr.io              | 443  |  TCP  | 216.239.32.223 |         |
+| PASS |               k8s.gcr.io              | 443  |  TCP  | 216.239.34.223 |         |
+| PASS |               k8s.gcr.io              | 443  |  TCP  | 216.239.36.223 |         |
+| PASS |               k8s.gcr.io              | 443  |  TCP  | 216.239.38.223 |         |
++------+---------------------------------------+------+-------+----------------+---------+
+
+SSL Connection Verification
++------+---------------------------------------+------+---------+----------------+---------+
+| P/F  |                  Host                 | Port |  Proto  | Resolved IP    | Err Msg |
++------+---------------------------------------+------+---------+----------------+---------+
+| PASS |          accounts.google.com          | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |          accounts.google.com          | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |          accounts.google.com          | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |          accounts.google.com          | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS | alt1-cache-management-prod.google.com | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |    cache-management-prod.google.com   | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |  cloudresourcemanager.googleapis.com  | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |         compute.googleapis.com        | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |     connectgateway.googleapis.com     | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |    containerregistry.googleapis.com   | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |      edgecontainer.googleapis.com     | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |       edgenetwork.googleapis.com      | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |       gkeconnect.googleapis.com       | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |         gkehub.googleapis.com         | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |        gkeonprem.googleapis.com       | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |           iam.googleapis.com          | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |     iamcredentials.googleapis.com     | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |         logging.googleapis.com        | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |       monitoring.googleapis.com       | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |     gkeonprem.mtls.googleapis.com     | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |         oauth2.googleapis.com         | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |   opsconfigmonitoring.googleapis.com  | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |       securetoken.googleapis.com      | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |     servicecontrol.googleapis.com     | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |      serviceusage.googleapis.com      | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |       stackdriver.googleapis.com      | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |         storage.googleapis.com        | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |    gmec-ipxe.storage.googleapis.com   | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |           sts.googleapis.com          | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |           www.googleapis.com          | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |                 gcr.io                | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |                 gcr.io                | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |                 gcr.io                | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |                 gcr.io                | 443  | TLSv1.3 | 216.239.38.223 |         |
+| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 216.239.32.223 |         |
+| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 216.239.34.223 |         |
+| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 216.239.36.223 |         |
+| PASS |               k8s.gcr.io              | 443  | TLSv1.3 | 216.239.38.223 |         |
++------+---------------------------------------+------+---------+----------------+---------+
+
+Qbone Connection Verification
++------+------------------------------------------+-----------------------------+------+-------+-----------+---------+
+| P/F  |                   Host                   | IP                          | Port | Proto | HTTP CODE | Err Msg |
++------+------------------------------------------+-----------------------------+------+-------+-----------+---------+
+| PASS |      qbone-africa-south1.google.com      | 192.178.18.33,192.178.19.33 | 443  |  QUIC |    404    |         |
+| PASS |         qbone-apac-2.google.com          | 192.178.18.17,192.178.19.17 | 443  |  QUIC |    404    |         |
+| PASS |         qbone-apac-3.google.com          | 192.178.18.10,192.178.19.10 | 443  |  QUIC |    404    |         |
+| PASS |       qbone-asia-east1.google.com        | 192.178.18.10,192.178.19.10 | 443  |  QUIC |    404    |         |
+| PASS |       qbone-asia-east2.google.com        | 192.178.18.11,192.178.19.11 | 443  |  QUIC |    404    |         |
+| PASS |     qbone-asia-northeast1.google.com     | 192.178.18.12,192.178.19.12 | 443  |  QUIC |    404    |         |
+| PASS |     qbone-asia-northeast2.google.com     | 192.178.18.13,192.178.19.13 | 443  |  QUIC |    404    |         |
+| PASS |       qbone-asia-south1.google.com       | 192.178.18.15,192.178.19.15 | 443  |  QUIC |    404    |         |
+| PASS |       qbone-asia-south2.google.com       | 192.178.18.16,192.178.19.16 | 443  |  QUIC |    404    |         |
+| PASS |     qbone-asia-southeast1.google.com     | 192.178.18.17,192.178.19.17 | 443  |  QUIC |    404    |         |
+| PASS |     qbone-asia-southeast2.google.com     | 192.178.18.4,192.178.19.4   | 443  |  QUIC |    404    |         |
+| PASS |  qbone-australia-southeast1.google.com   | 192.178.18.18,192.178.19.18 | 443  |  QUIC |    404    |         |
+| PASS |  qbone-australia-southeast2.google.com   | 192.178.18.19,192.178.19.19 | 443  |  QUIC |    404    |         |
+| PASS |         qbone-emea-1.google.com          | 192.178.18.21,192.178.19.21 | 443  |  QUIC |    404    |         |
+| PASS |         qbone-emea-2.google.com          | 192.178.18.5,192.178.19.5   | 443  |  QUIC |    404    |         |
+| PASS |     qbone-europe-central2.google.com     | 192.178.18.20,192.178.19.20 | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-north1.google.com      | 192.178.18.5,192.178.19.5   | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-west1.google.com       | 192.178.18.21,192.178.19.21 | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-west2.google.com       | 192.178.18.22,192.178.19.22 | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-west3.google.com       | 192.178.18.23,192.178.19.23 | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-west4.google.com       | 192.178.18.24,192.178.19.24 | 443  |  QUIC |    404    |         |
+| PASS |      qbone-europe-west6.google.com       | 192.178.18.25,192.178.19.25 | 443  |  QUIC |    404    |         |
+| PASS |        qbone-me-west1.google.com         | 192.178.18.26,192.178.19.26 | 443  |  QUIC |    404    |         |
+| PASS | qbone-northamerica-northeast1.google.com | 192.178.18.6,192.178.19.6   | 443  |  QUIC |    404    |         |
+| PASS | qbone-northamerica-northeast2.google.com | 192.178.18.27,192.178.19.27 | 443  |  QUIC |    404    |         |
+| PASS |   qbone-southamerica-east1.google.com    | 192.178.18.28,192.178.19.28 | 443  |  QUIC |    404    |         |
+| PASS | qbone-southamerica-east1-ext1.google.com | 192.178.18.28,192.178.19.28 | 443  |  QUIC |    404    |         |
+| PASS |   qbone-southamerica-west1.google.com    | 192.178.18.1,192.178.19.1   | 443  |  QUIC |    404    |         |
+| PASS |       qbone-us-central1.google.com       | 192.178.18.3,192.178.19.3   | 443  |  QUIC |    404    |         |
+| PASS |       qbone-us-central2.google.com       | 192.178.18.29,192.178.19.29 | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-east-1.google.com        | 192.178.18.34,192.178.19.34 | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-east-2.google.com        | 192.178.18.30,192.178.19.30 | 443  |  QUIC |    404    |         |
+| PASS |     qbone-us-east-crash-1.google.com     | 192.178.18.2,192.178.19.2   | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-east1.google.com         | 192.178.18.34,192.178.19.34 | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-east4.google.com         | 192.178.18.7,192.178.19.7   | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-west-1.google.com        | 192.178.18.8,192.178.19.8   | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-west1.google.com         | 192.178.18.8,192.178.19.8   | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-west2.google.com         | 192.178.18.9,192.178.19.9   | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-west3.google.com         | 192.178.18.31,192.178.19.31 | 443  |  QUIC |    404    |         |
+| PASS |        qbone-us-west4.google.com         | 192.178.18.32,192.178.19.32 | 443  |  QUIC |    404    |         |
++------+------------------------------------------+-----------------------------+------+-------+-----------+---------+
+
+IPRR Network Range Coverage
++--------------------+--------------+
+| IPRR Network Range | Test Covered |
++--------------------+--------------+
+| 142.251.144.0/20   |    False     |
+| 192.178.18.0/23    |     True     |
+| 192.178.40.0/22    |    False     |
+| 216.239.32.0/24    |     True     |
+| 216.239.34.0/24    |     True     |
+| 216.239.36.0/24    |     True     |
+| 216.239.38.0/24    |     True     |
+| 34.143.72.0/21     |    False     |
+| 35.235.162.0/23    |    False     |
++--------------------+--------------+
+
