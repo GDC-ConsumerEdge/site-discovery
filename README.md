@@ -81,3 +81,9 @@ Verifying SSL connections ... 29/29
 Verifying QBONE connections ... 40/40
 Write report to /usr/local/google/home/danielxia/PycharmProjects/siteDiscovery/release/alpha/site-discovery-report_20241020-195123.txt ... Done
 ```
+
+## Disclaimer
+
+This project is not an official Google project. It is not supported by
+Google and Google specifically disclaims all warranties as to its quality,
+merchantability, or fitness for a particular purpose.
