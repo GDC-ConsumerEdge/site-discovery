@@ -41,7 +41,7 @@ class SiteDiscoveryTool:
                 self.shPath = shutil.which(sh)
                 if self.shPath is not None:
                     # Requires Powershell Version >= 5
-                    cmd = f'{self.shPath} (Get-Host).Version.Major'
+                    cmd = f'"{self.shPath}" (Get-Host).Version.Major'
                     res = os.popen(cmd).read().strip()
                     if int(res) >= 5:
                         self.shType = 'powershell'
@@ -109,7 +109,7 @@ class SiteDiscoveryTool:
             # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
             ps1 = os.path.join(self.artefactDir, 'get_local_network.ps1')
             r = VerifyResults()
-            r.cmd = f'{self.shPath} -F {ps1}'
+            r.cmd = f'"{self.shPath}" -F {ps1}'
             try:
                 r.response = os.popen(r.cmd).read()
                 gw, ip, dns_svr, intf_name = r.response.splitlines()
