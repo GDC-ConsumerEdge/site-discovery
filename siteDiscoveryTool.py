@@ -14,6 +14,7 @@
 
 import sys
 import yaml
+import subprocess
 import csv
 import dns.resolver
 from prettytable import PrettyTable
@@ -41,13 +42,16 @@ class SiteDiscoveryTool:
                 self.shPath = shutil.which(sh)
                 if self.shPath is not None:
                     # Requires Powershell Version >= 5
-                    cmd = f'"{self.shPath}" (Get-Host).Version.Major'
-                    res = os.popen(cmd).read().strip()
-                    if int(res) >= 5:
-                        self.shType = 'powershell'
-                        break
-                    else:
-                        print(f'[WARN] Powershell version {res} is too low, 5 is required')
+                    cmd = [self.shPath, '-Command', '(Get-Host).Version.Major']
+                    res = subprocess.run(cmd, capture_output=True, text=True,check=True).stdout.strip()
+                    try:
+                        if int(res) >= 5:
+                            self.shType = 'powershell'
+                            break
+                        else:
+                            raise
+                    except:
+                        print(f'[WARN] Powershell version 5 is required, got {res}')
         elif self.osType == 'LINUX':
             if os.geteuid():
                 self.isRoot = False
@@ -109,7 +113,7 @@ class SiteDiscoveryTool:
             # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
             ps1 = os.path.join(self.artefactDir, 'get_local_network.ps1')
             r = VerifyResults()
-            r.cmd = f'"{self.shPath}" -F {ps1}'
+            r.cmd = f'"{self.shPath}" -File "{ps1}"'
             try:
                 r.response = os.popen(r.cmd).read()
                 gw, ip, dns_svr, intf_name = r.response.splitlines()
