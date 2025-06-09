@@ -113,13 +113,13 @@ class SiteDiscoveryTool:
             # If multiple gw, take the one with the least RouteMetric + InterfaceMetric
             ps1 = os.path.join(self.artefactDir, 'get_local_network.ps1')
             r = VerifyResults()
-            r.cmd = f'"{self.shPath}" -File "{ps1}"'
+            r.cmd = [self.shPath, "-File", ps1]
             try:
-                r.response = os.popen(r.cmd).read()
+                r.response = subprocess.run(r.cmd, capture_output=True, text=True,check=True).stdout
                 gw, ip, dns_svr, intf_name = r.response.splitlines()
                 r.bOK = True
                 self.log_result(r)
-            except:
+            except Exception as e:
                 r.errReason = 'Cannot get local network config'
                 self.log_result(r)
                 print(f'[MAJOR] Cannot get local network config => {self.shType}')
