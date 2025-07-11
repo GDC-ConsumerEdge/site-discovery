@@ -1,0 +1,43 @@
+
+# Log files
+**/site-discovery*.*
+
+# Avoid any credentials
+credentials.json
+
+# Ignore generated files
+*.pyc
+*.pyo
+*.pyd
+*.egg-info
+*.egg
+.pytest_cache/
+__pycache__/
+instance/
+.envrc
+# Ignore virtual environment files
+.venv
+# Ignore database files
+.database
+# Ignore media files
+.media
+# Ignore test files
+*.test
+# Ignore build files
+*.build
+# Ignore venv files
+.venv
+
+
+# Temp folder
+tmp/
+
+# Project files
+.idea
+.DS_Store
+.vscode/
+*.code-workspace
+.eslintcache
+
+# Special folders
+_*/
