@@ -13,6 +13,7 @@ However, if for any security reason the executable file cannot run, user could a
 git clone https://github.com/GDC-ConsumerEdge/site-discovery.git
 cd site-discovery
 ```
+
 ### create a virtual environment
 Assuming python3 is already installed. Now create a python virtual environment under the project directory.
 If using Pycharm, the IDE probably already did this step. Please skip this step if virtual environment is already created.
@@ -24,13 +25,13 @@ python3 -m venv .venv
 ```
 python3 -m venv venv
 ```
-## Build a standalone executables
+
+#### activate virtual environment
 - Linux System
 ```
-build.sh
+source .venv/bin/activate
 ```
 - Windows System
 ```
-build.bat
+venv/Scripts/activate.bat
 ```
-binary executable is generated in `dist` folder
