@@ -1,0 +1,22 @@
+# Python virtual environment
+.venv
+venv
+
+# Ignore build artifacts and logs
+*.log
+*.pyc
+
+# Ignore git files
+.git
+.gitignore
+__pycache__
+
+# docs and releases
+docs/
+release/
+artifacts/
+
+# build tools
+build.*
+
+site-discovery*example*

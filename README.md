@@ -74,6 +74,14 @@ python3 main.py --file your_playbook.yaml
 
 Playbook exmaple is [here](playbook.yaml)
 
+
+### Run as Docker
+
+```
+docker run -it -v $(pwd)/playbook.yaml:/var/playbook.yaml site-discovery --file /var/playbook.yaml
+```
+
+
 ## Example outputs
 The script will generate two text files
 - [report file](site-discovery-report.example.txt) - connection validation for each endpoints in the playbook file
