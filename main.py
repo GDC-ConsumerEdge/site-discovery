@@ -23,7 +23,7 @@ def main():
     proj_dir = os.path.dirname(__file__)
 
     # Process input arguments
-    parser = argparse.ArgumentParser(description="GDCE Site Discovery tool")
+    parser = argparse.ArgumentParser(description="GDC Site Discovery tool")
     parser.add_argument(
         "-f",
         "--file",
@@ -75,10 +75,6 @@ def main():
     tool = SiteDiscoveryTool()
     log = Logger()
 
-    # add log file
-    # t_now = datetime.now()
-    # log_file_name = f"site-discovery_{t_now.strftime('%Y%m%d-%H%M%S')}.log"
-    # log_file_path = os.path.join(config_dict['out_dir'], log_file_name)
     log_file_name = os.path.join(config_dict['log_dir'], 'site-discovery.log')
     try:
         log_file = open(log_file_name, 'a')
@@ -110,7 +106,6 @@ def main():
             print(f"Invalid playbook YAML file {config_dict['playbook']}!")
             return
     print('OK')
-    # print(tool.playbook)
 
     # load dns mapping file
     print(f"Loading DNS mapping file {config_dict['dns_mapper']} ...", end='')
@@ -163,7 +158,6 @@ def main():
     tool.create_report()
     print('Done')
 
-    # print(tool.results.keys())
 
 
 if __name__ == '__main__':
