@@ -309,7 +309,7 @@ class SiteDiscoveryTool:
         return ret
 
     def verify_playbook_connection(self):
-        for proto in ['tcp', 'ssl']:
+        for proto in ['tcp', 'udp', 'ssl']:
             if proto not in self.playbook.keys():
                 continue
             if proto not in self.results.keys():
@@ -323,7 +323,7 @@ class SiteDiscoveryTool:
                     port = int(port)
                 except:
                     continue
-                # check if this host is bind to GDC endpoionts
+                # check if this host is bind to GDC endpoints
                 host = self.dns_mapper.map_dns(ori_host)
                 if host != ori_host.lower():
                     # this generic google endpoint is mapped to gdc endpoint
@@ -335,6 +335,9 @@ class SiteDiscoveryTool:
                     for ip in res.abstracts['ip']:
                         if proto == 'tcp':
                             con = verify_tcp_connection(ip, port)
+                            con.abstracts['host'] = ori_host
+                        elif proto == 'udp':
+                            con = verify_udp_connection(ip, port)
                             con.abstracts['host'] = ori_host
                         else:
                             con = verify_ssl_connection(ori_host, port, ip)
@@ -404,7 +407,7 @@ class SiteDiscoveryTool:
         self.print_dns_table()
         self.print_ntp_table()
         self.print_session_table('tcp')
-        # self.print_session_table('udp')
+        self.print_session_table('udp')
         self.print_session_table('ssl')
         self.print_qbone_table()
         self.print_iprr_table()
@@ -440,7 +443,6 @@ class SiteDiscoveryTool:
         table.field_names = ['P/F', "DNS Server IP", "Port", "Proto", 'Target Hostname']
         # reg = re.compile(r'DNS lookup: ([.\w]+), Server: \[([^]]+)], Port: (\d+)\((\d+)\)')
         for res in self.results['dns']:
-            # g = reg.search(res.cmd)
             table.add_row([
                 'PASS' if res.bOK else 'FAIL',
                 res.abstracts['dns'][0],
@@ -448,7 +450,8 @@ class SiteDiscoveryTool:
                 res.abstracts['proto'],
                 res.abstracts['host']
             ])
-        print('DNS Server Verification', file=self.reporter)
+        is_pass = all(res.bOK for res in self.results['dns'])
+        print(f'DNS Server Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
         table.align["DNS Server IP"] = "l"
         table.align["Target Hostname"] = "l"
         print(table, file=self.reporter)
@@ -467,7 +470,8 @@ class SiteDiscoveryTool:
                 res.abstracts['tx_time'] if res.bOK else '',
                 res.errReason
             ])
-        print('NTP Server Verification', file=self.reporter)
+        is_pass = all(res.bOK for res in self.results['ntp'])
+        print(f'NTP Server Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["Resolved IP"] = "l"
         table.align["TX Time"] = "l"
@@ -489,8 +493,10 @@ class SiteDiscoveryTool:
                 res.abstracts['ip'] if 'ip' in res.abstracts.keys() else '',
                 res.errReason
             ])
+
             # print(type(res.abstracts['host']))
-        print(f'{name.upper()} Connection Verification', file=self.reporter)
+        is_pass = all(res.bOK for res in self.results[name])
+        print(f'{name.upper()} Connection Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["Resolved IP"] = "l"
         table.align["Err Msg"] = "l"
@@ -512,8 +518,10 @@ class SiteDiscoveryTool:
                 res.abstracts['http_code'] if 'http_code' in res.abstracts.keys() else '',
                 res.errReason
             ])
+
             # print(type(res.abstracts['host']))
-        print(f'Qbone Connection Verification', file=self.reporter)
+        is_pass = all(res.bOK for res in self.results['qbone'])
+        print(f'Qbone Connection Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["IP"] = "l"
         table.align["Err Msg"] = "l"

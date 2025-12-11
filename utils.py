@@ -393,6 +393,9 @@ def verify_tcp_connection(ip: str, port: int) -> VerifyResults:
     return ret
 
 
+def verify_udp_connection(ip: str, port: int) -> VerifyResults:
+    return verify_quic_connection(ip, port, proto_name='UDP by QUIC')
+
 def verify_ssl_connection(host: str, port: int, ip: str = None) -> VerifyResults:
     ret = VerifyResults()
     ret.cmd = f'use ssl to connect {host}:{port}'
@@ -420,14 +423,17 @@ def verify_ssl_connection(host: str, port: int, ip: str = None) -> VerifyResults
     return ret
 
 
-def verify_quic_connection(host: str, port: int) -> VerifyResults:
+def verify_quic_connection(host: str, port: int, proto_name: str = 'QUIC') -> VerifyResults:
     ret = VerifyResults()
     ret.cmd = f'use quic to connect {host}:{port}'
     ret.abstracts['host'] = host
     ret.abstracts['port'] = port
-    ret.abstracts['proto'] = 'QUIC'
-    dns_results = resolve_dns(host)
-    ret.abstracts['ip'] = dns_results.abstracts['ip'] if dns_results.bOK else []
+    ret.abstracts['proto'] = proto_name
+    if is_ipv4_unicast(host):
+        ret.abstracts['ip'] = [host]
+    else:
+        dns_results = resolve_dns(host)
+        ret.abstracts['ip'] = dns_results.abstracts['ip'] if dns_results.bOK else []
     try:
         res = quic_client_request([f"https://{host}:{port}"], include=True, insecure=True)
         headers = res['headers'][0]
