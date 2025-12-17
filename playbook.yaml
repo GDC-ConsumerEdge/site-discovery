@@ -35,6 +35,37 @@ tcp:
   - www.googleapis.com:443
   - gcr.io:443
   - k8s.gcr.io:443
+udp:
+  - accounts.google.com:443
+  - alt1-cache-management-prod.google.com:443
+  - cache-management-prod.google.com:443
+  - cloudresourcemanager.googleapis.com:443
+  - compute.googleapis.com:443
+  - connectgateway.googleapis.com:443
+  - containerregistry.googleapis.com:443
+  - edgecontainer.googleapis.com:443
+  - edgenetwork.googleapis.com:443
+  - gkeconnect.googleapis.com:443
+  - gkehub.googleapis.com:443
+  - gkeonprem.googleapis.com:443
+  - iam.googleapis.com:443
+  - iamcredentials.googleapis.com:443
+  - logging.googleapis.com:443
+  - monitoring.googleapis.com:443
+  - gkeonprem.mtls.googleapis.com:443
+  - oauth2.googleapis.com:443
+  - offnetmanagemet-pa.googleapis.com:443
+  - opsconfigmonitoring.googleapis.com:443
+  - securetoken.googleapis.com:443
+  - servicecontrol.googleapis.com:443
+  - serviceusage.googleapis.com:443
+  - stackdriver.googleapis.com:443
+  - storage.googleapis.com:443
+  - gmec-ipxe.storage.googleapis.com:443
+  - sts.googleapis.com:443
+  - www.googleapis.com:443
+  - gcr.io:443
+  - k8s.gcr.io:443
 ssl:
   - accounts.google.com:443
   - alt1-cache-management-prod.google.com:443
