@@ -477,3 +477,20 @@ def parse_range(r: str) -> list:
             # syntax error, play dumb ¯\_(ツ)_/¯
             pass
     return ret
+
+def show_guidance(test: str) -> str:
+    remediation_guidance = {
+    "default_gateway": "Ensure the default gateway IP is correct and reachable. Check routing tables via 'ip route show' and verify physical cable connections.",
+    "dns_servers": "Verify that the DNS servers (e.g., 8.8.8.8) are reachable over UDP/TCP port 53. Ensure your firewall allows outbound queries to resolve external domains.",
+    "ntp_servers": "Ensure UDP port 123 is open to time.google.com. Accurate system time is mandatory for successful SSL/TLS handshakes.",
+    "tcp": "Update firewall rules to allow outbound TCP traffic on port 443 to Google Cloud API endpoints. Check that network ACLs are not blocking target CIDR ranges.",
+    "udp": "Verify that outbound UDP traffic on port 443 is allowed in your firewall. This is required for high-performance connectivity to Google services.",
+    "ssl": "Ensure outbound port 443 is open. Verify that no deep packet inspection (DPI) or transparent proxies are intercepting and breaking SSL/TLS sessions.",
+    "qbone_quic": "Verify that UDP port 443 is allowed outbound for QUIC traffic. These connections are required for the management tunnels used by GDCc.",
+    "endpoint_rewriting": "Check the dns_map.csv file for configuration errors. Ensure standard Google endpoints are correctly mapped to their GDCc-equivalent hostnames.",
+    "iprr_validation": "Review the iprr.csv file for format errors or invalid CIDR ranges. Ensure the provided ranges do not overlap with existing network infrastructure."
+    }
+    if test in remediation_guidance:
+        return remediation_guidance[test]
+    else:
+        return 'Unknown test'

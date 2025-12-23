@@ -432,7 +432,8 @@ class SiteDiscoveryTool:
         table.field_names = ["Default Gateway", "Ping", "ARP"]
         for res in self.results['gw']:
             table.add_row([res['ip'], res['ping'], res['mac']])
-        print('Default Gateway Verification', file=self.reporter)
+        is_pass = all(res['ping'] == 'PASS' for res in self.results['gw'])
+        print(f'Default Gateway Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance("default_gateway")}', file=self.reporter)
         print(table, file=self.reporter)
         print('', file=self.reporter)
 
@@ -451,7 +452,7 @@ class SiteDiscoveryTool:
                 res.abstracts['host']
             ])
         is_pass = all(res.bOK for res in self.results['dns'])
-        print(f'DNS Server Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
+        print(f'DNS Server Verification: {"PASS" if is_pass else "FAIL: \n"  + show_guidance("dns_servers")}', file=self.reporter)
         table.align["DNS Server IP"] = "l"
         table.align["Target Hostname"] = "l"
         print(table, file=self.reporter)
@@ -471,7 +472,7 @@ class SiteDiscoveryTool:
                 res.errReason
             ])
         is_pass = all(res.bOK for res in self.results['ntp'])
-        print(f'NTP Server Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
+        print(f'NTP Server Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance("ntp_servers")}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["Resolved IP"] = "l"
         table.align["TX Time"] = "l"
@@ -496,7 +497,7 @@ class SiteDiscoveryTool:
 
             # print(type(res.abstracts['host']))
         is_pass = all(res.bOK for res in self.results[name])
-        print(f'{name.upper()} Connection Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
+        print(f'{name.upper()} Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance(name)}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["Resolved IP"] = "l"
         table.align["Err Msg"] = "l"
@@ -521,7 +522,7 @@ class SiteDiscoveryTool:
 
             # print(type(res.abstracts['host']))
         is_pass = all(res.bOK for res in self.results['qbone'])
-        print(f'Qbone Connection Verification: {"PASS" if is_pass else "FAIL"}', file=self.reporter)
+        print(f'Qbone Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance("qbone_quic")}', file=self.reporter)
         table.align["HOST"] = "l"
         table.align["IP"] = "l"
         table.align["Err Msg"] = "l"
@@ -533,7 +534,8 @@ class SiteDiscoveryTool:
         table.field_names = ['IPRR Network Range', "Test Covered"]
         for net_range in self.iprr.net_ranges:
             table.add_row([net_range['net_str'], net_range['tested']])
-        print(f'IPRR Network Range Coverage', file=self.reporter)
+        is_pass = all(net_range['tested'] for net_range in self.iprr.net_ranges)
+        print(f'IPRR Network Range Coverage: {"PASS" if is_pass else "FAIL: \n" + show_guidance("iprr_validation")}', file=self.reporter)
         table.align["IPRR Network Range"] = "l"
         table.align["Test Covered"] = "c"
         print(table, file=self.reporter)
