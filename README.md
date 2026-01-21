@@ -19,32 +19,34 @@ This tool can be run as an executable (ie: `.exe` or `+x`), as a Python script, 
 
 #### Linux System (bash / zsh)
 ```shell
-export VERSION="v0.0.1-alpha"
+export VERSION="v0.0.2-alpha"
 
 # One-time download per version
-wget -O site-discovery "https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/${VERSION}$/siteDiscovery" && \
+wget -O site-discovery "https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/${VERSION}/siteDiscovery" && \
     chmod +x site-discovery
 
-# Run the site discovery
-./siteDiscovery --file <playbook.yaml>
+# Run the site discovery. If you have another playbook file, change the playbook.yaml field for it.
+./site-discovery --file playbook.yaml
 
-# Optional
-sudo mv ./siteDiscovery /usr/local/bin
+# Optional 
+sudo mv ./site-discovery /usr/local/bin
 ```
 
 #### Windows
 ```bat
+:: Use cmd, not PowerShell. If you are in a PowerShell terminal, just enter the “cmd” command.
+
 @echo off
 setlocal
 
 :: Set the release version to download
-set "VERSION=v0.0.1-alpha"
+set "VERSION=v0.0.2-alpha"
 
 :: Define the output filename. Using .exe is standard for Windows executables.
-set "FILENAME=site-discovery.exe"
+set "FILENAME=siteDiscovery.exe"
 
 :: Construct the download URL
-set "URL=https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/%VERSION%/siteDiscovery"
+set "URL=https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/%VERSION%/%FILENAME%"
 
 echo Downloading %FILENAME% from release %VERSION%...
 
@@ -52,12 +54,16 @@ echo Downloading %FILENAME% from release %VERSION%...
 :: -L follows redirects, which is important for GitHub.
 :: -o specifies the output file name.
 :: The "&&" operator ensures the next part only runs if the download succeeds.
-curl -L -o "%FILENAME%" "%URL%"
+curl -L -o "%FILENAME%" "%URL%
+"
+:: Run the site discovery. If you have another playbook file, change the playbook.yaml field for it.
+siteDiscovery.exe --file playbook.yaml
+
 ```
 
 ### Run as Python
 
-> NOTE: Optionally setup the venv environment defined in [developer documentation](docs/development.md)
+> NOTE: Follow this documentation to clone the repo and setup the venv environment [developer documentation](docs/development.md)
 
 #### install required python package and run the script
 ```
@@ -72,7 +78,7 @@ python3 main.py --help
 python3 main.py --file your_playbook.yaml
 ```
 
-Playbook exmaple is [here](playbook.yaml)
+Playbook example is [here](playbook.yaml)
 
 ## Example outputs
 The script will generate two text files
