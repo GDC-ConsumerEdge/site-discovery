@@ -19,4 +19,4 @@ wcwidth==0.2.13
 wsproto==1.2.0
 
 # only for windows packaging
-pyinstaller==6.5.0
+pyinstaller==6.5.0; sys_platform == 'win32'
