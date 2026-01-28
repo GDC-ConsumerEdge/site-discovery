@@ -401,15 +401,19 @@ class SiteDiscoveryTool:
     def bind_reporter(self, reporter: TextIO):
         self.reporter = reporter
 
-    def create_report(self):
+    def create_report(self, verbose: bool = False):
+        if not verbose:
+            print("Note: Hostnames with suffix 'google.com' are abbreviated as 'g.com'", file=self.reporter)
+            print('', file=self.reporter)
+
         self.print_local_network_table()
         self.print_gateway_table()
         self.print_dns_table()
         self.print_ntp_table()
-        self.print_session_table('tcp')
-        self.print_session_table('udp')
-        self.print_session_table('ssl')
-        self.print_qbone_table()
+        self.print_session_table('tcp', verbose)
+        self.print_session_table('udp', verbose)
+        self.print_session_table('ssl', verbose)
+        self.print_qbone_table(verbose)
         self.print_iprr_table()
 
     def print_local_network_table(self):
@@ -480,50 +484,136 @@ class SiteDiscoveryTool:
         print(table, file=self.reporter)
         print('', file=self.reporter)
 
-    def print_session_table(self, name: str):
+    def print_session_table(self, name: str, verbose: bool = False):
         if name not in self.results.keys():
             return
-        table = PrettyTable()
-        table.field_names = ['P/F', "Host", "Port", "Proto", 'Resolved IP', 'Err Msg']
-        for res in self.results[name]:
-            table.add_row([
-                'PASS' if res.bOK else 'FAIL',
-                res.abstracts['host'],
-                res.abstracts['port'],
-                res.abstracts['proto'],
-                res.abstracts['ip'] if 'ip' in res.abstracts.keys() else '',
-                res.errReason
-            ])
+        
+        if verbose:
+            table = PrettyTable()
+            table.field_names = ['P/F', "Host", "Port", "Proto", 'Resolved IP', 'Err Msg']
+            for res in self.results[name]:
+                table.add_row([
+                    'PASS' if res.bOK else 'FAIL',
+                    res.abstracts['host'],
+                    res.abstracts['port'],
+                    res.abstracts['proto'],
+                    res.abstracts['ip'] if 'ip' in res.abstracts.keys() else '',
+                    res.errReason
+                ])
+            is_pass = all(res.bOK for res in self.results[name])
+            print(f'{name.upper()} Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance(name)}', file=self.reporter)
+            table.align["Host"] = "l"
+            table.align["Host"] = "l"
+            table.align["Resolved IP"] = "l"
+            table.align["Err Msg"] = "l"
+            print(table, file=self.reporter)
+            print('', file=self.reporter)
+            return
 
-            # print(type(res.abstracts['host']))
+        # Concise Report Logic
+        aggregated = {}
+        ports = set()
+        protos = set()
+        
+        for res in self.results[name]:
+            host = res.abstracts['host']
+            if 'google.com' in host:
+                host = host.replace('google.com', 'g.com')
+            
+            if host not in aggregated:
+                aggregated[host] = {'ips': [], 'ok': True, 'errors': set()}
+            
+            if 'ip' in res.abstracts.keys() and res.abstracts['ip']:
+                ip_data = res.abstracts['ip']
+                if isinstance(ip_data, list):
+                    for ip in ip_data:
+                        if ip not in aggregated[host]['ips']:
+                            aggregated[host]['ips'].append(ip)
+                elif ip_data not in aggregated[host]['ips']:
+                    aggregated[host]['ips'].append(ip_data)
+            
+            if not res.bOK:
+                aggregated[host]['ok'] = False
+                if res.errReason:
+                    aggregated[host]['errors'].add(res.errReason)
+            
+            ports.add(str(res.abstracts['port']))
+            protos.add(str(res.abstracts['proto']))
+
         is_pass = all(res.bOK for res in self.results[name])
         print(f'{name.upper()} Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance(name)}', file=self.reporter)
-        table.align["HOST"] = "l"
+        print(f'Port: {", ".join(sorted(ports))}, Proto: {", ".join(sorted(protos))}', file=self.reporter)
+
+        table = PrettyTable()
+        table.field_names = ['P/F', "Host", 'Resolved IP', 'Err Msg']
+        
+        for host, data in aggregated.items():
+            table.add_row([
+                'PASS' if data['ok'] else 'FAIL',
+                host,
+                ', '.join(data['ips']),
+                ', '.join(sorted(list(data['errors'])))
+            ])
+            
+        table.align["Host"] = "l"
         table.align["Resolved IP"] = "l"
         table.align["Err Msg"] = "l"
         print(table, file=self.reporter)
         print('', file=self.reporter)
 
-    def print_qbone_table(self):
+    def print_qbone_table(self, verbose: bool = False):
         if 'qbone' not in self.results.keys():
             return
+        
+        if verbose:
+            table = PrettyTable()
+            table.field_names = ['P/F', "Host", "IP", "Port", "Proto", "HTTP CODE", 'Err Msg']
+            for res in self.results['qbone']:
+                table.add_row([
+                    'PASS' if res.bOK else 'FAIL',
+                    res.abstracts['host'],
+                    ','.join(res.abstracts['ip']),
+                    res.abstracts['port'],
+                    res.abstracts['proto'],
+                    res.abstracts['http_code'] if 'http_code' in res.abstracts.keys() else '',
+                    res.errReason
+                ])
+            is_pass = all(res.bOK for res in self.results['qbone'])
+            print(f'Qbone Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance("qbone_quic")}', file=self.reporter)
+            table.align["Host"] = "l"
+            table.align["IP"] = "l"
+            table.align["Err Msg"] = "l"
+            print(table, file=self.reporter)
+            print('', file=self.reporter)
+            return
+
+        # Concise Logic
+        ports = set()
+        protos = set()
+        
         table = PrettyTable()
-        table.field_names = ['P/F', "Host", "IP", "Port", "Proto", "HTTP CODE", 'Err Msg']
+        table.field_names = ['P/F', "Host", "IP", 'Err Msg']
+        
         for res in self.results['qbone']:
+            host = res.abstracts['host']
+            if 'google.com' in host:
+                host = host.replace('google.com', 'g.com')
+                
+            ports.add(str(res.abstracts['port']))
+            protos.add(str(res.abstracts['proto']))
+            
             table.add_row([
                 'PASS' if res.bOK else 'FAIL',
-                res.abstracts['host'],
+                host,
                 ','.join(res.abstracts['ip']),
-                res.abstracts['port'],
-                res.abstracts['proto'],
-                res.abstracts['http_code'] if 'http_code' in res.abstracts.keys() else '',
                 res.errReason
             ])
-
-            # print(type(res.abstracts['host']))
+            
         is_pass = all(res.bOK for res in self.results['qbone'])
         print(f'Qbone Connection Verification: {"PASS" if is_pass else "FAIL: \n" + show_guidance("qbone_quic")}', file=self.reporter)
-        table.align["HOST"] = "l"
+        print(f'Port: {", ".join(sorted(ports))}, Proto: {", ".join(sorted(protos))}', file=self.reporter)
+        
+        table.align["Host"] = "l"
         table.align["IP"] = "l"
         table.align["Err Msg"] = "l"
         print(table, file=self.reporter)
