@@ -25,7 +25,7 @@ export VERSION="v0.0.2-alpha"
 wget -O site-discovery "https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/${VERSION}/siteDiscovery" && \
     chmod +x site-discovery
 
-# Run the site discovery. If you have another playbook file, change the playbook.yaml field for it.
+# Run the site discovery. If you have another playbook file, change the playbook.yaml field for it. If you want to get the long version of the report, add the --verbose flag.
 ./site-discovery --file playbook.yaml
 
 # Optional 
@@ -56,7 +56,7 @@ echo Downloading %FILENAME% from release %VERSION%...
 :: The "&&" operator ensures the next part only runs if the download succeeds.
 curl -L -o "%FILENAME%" "%URL%
 "
-:: Run the site discovery. If you have another playbook file, change the playbook.yaml field for it.
+:: Run the site discovery. If you have another playbook file, change the playbook.yaml field for it. If you want to get the long version of the report, add the --verbose flag.
 siteDiscovery.exe --file playbook.yaml
 
 ```
@@ -76,6 +76,8 @@ python3 main.py
 python3 main.py --help
 # use custom playbook
 python3 main.py --file your_playbook.yaml
+# get long version of the report
+python3 main.py --file your_playbook.yaml --verbose
 ```
 
 Playbook example is [here](playbook.yaml)
@@ -98,6 +100,7 @@ Verify default gateway ... NOK
 Verifying DNS Servers ... OK
 Verifying NTP Servers ... OK
 Verifying TCP connections ... 29/29
+Verifying UDP connections ... 29/29
 Verifying SSL connections ... 29/29
 Verifying QBONE connections ... 40/40
 Write report to /home/google/siteDiscovery/logs/site-discovery-report_20241020-195123.txt ... Done

@@ -62,13 +62,20 @@ def main():
         help="""API IP address range file. Resolved endpoint IPv4 address should be in this range. 
         Default is 'iprr.csv' in the installation directory"""
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable verbose reporting (detailed legacy format)."
+    )
     args = parser.parse_args()
     config_dict = {
         'playbook': args.file,
         'log_dir': args.log_dir,
         'report_dir': args.report_dir,
         'dns_mapper': args.dns_mapper,
-        'iprr': args.iprr
+        'iprr': args.iprr,
+        'verbose': args.verbose
     }
 
     # Create tool instances
@@ -160,7 +167,7 @@ def main():
 
     # Create report
     print(f"Write report to {report_file_name} ... ", end='')
-    tool.create_report()
+    tool.create_report(verbose=config_dict['verbose'])
     print('Done')
 
     # print(tool.results.keys())
