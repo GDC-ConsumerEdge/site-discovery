@@ -25,8 +25,8 @@ export VERSION="v0.0.2-alpha"
 wget -O site-discovery "https://github.com/GDC-ConsumerEdge/site-discovery/releases/download/${VERSION}/siteDiscovery" && \
     chmod +x site-discovery
 
-# Run the site discovery. If you have another playbook file, change the playbook.yaml field for it. If you want to get the long version of the report, add the --verbose flag.
-./site-discovery --file playbook.yaml
+# Run the site discovery. If you have another playbook file, add the --file flag. If you want to get the long version of the report, add the --verbose flag.
+./site-discovery
 
 # Optional 
 sudo mv ./site-discovery /usr/local/bin
@@ -56,8 +56,8 @@ echo Downloading %FILENAME% from release %VERSION%...
 :: The "&&" operator ensures the next part only runs if the download succeeds.
 curl -L -o "%FILENAME%" "%URL%
 "
-:: Run the site discovery. If you have another playbook file, change the playbook.yaml field for it. If you want to get the long version of the report, add the --verbose flag.
-siteDiscovery.exe --file playbook.yaml
+:: Run the site discovery. If you have another playbook file, add the --file flag. If you want to get the long version of the report, add the --verbose flag.
+siteDiscovery.exe
 
 ```
 
