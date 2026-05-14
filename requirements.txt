@@ -20,3 +20,5 @@ wsproto==1.2.0
 
 # only for windows packaging
 pyinstaller==6.5.0; sys_platform == 'win32'
+pytest==8.2.0
+
