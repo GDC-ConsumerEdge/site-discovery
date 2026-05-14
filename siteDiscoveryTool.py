@@ -359,13 +359,20 @@ class SiteDiscoveryTool:
 
     def verify_playbook_qbone(self):
         proto = 'qbone'
-        if proto not in self.playbook.keys():
+        qbone_targets = []
+        if 'qbone_ips' in self.playbook.keys():
+            qbone_targets = self.playbook['qbone_ips']
+        elif 'qbone' in self.playbook.keys():
+            qbone_targets = self.playbook['qbone']
+        else:
             return False
+
         if proto not in self.results.keys():
             self.results[proto] = []
-        total = len(self.playbook[proto])
+
+        total = len(qbone_targets)
         print(f'Verifying {proto.upper()} connections ... 0/{total}', end='')
-        for i, line in enumerate(self.playbook[proto]):
+        for i, line in enumerate(qbone_targets):
             print(f'\rVerifying {proto.upper()} connections ... {i + 1}/{total}', end='')
             try:
                 host, port = line.split(':')
@@ -375,8 +382,14 @@ class SiteDiscoveryTool:
             con = verify_quic_connection(host, port)
             self.log_result(con)
             self.results[proto].append(con)
-            for ip_str in con.abstracts['ip']:
-                self.iprr.record_tested_net(ip_str)
+            # handle potential list or string IP results
+            ip_data = con.abstracts.get('ip', [])
+            if isinstance(ip_data, list):
+                for ip_str in ip_data:
+                    self.iprr.record_tested_net(ip_str)
+            elif isinstance(ip_data, str):
+                self.iprr.record_tested_net(ip_data)
+
         print(f'\rVerifying {proto.upper()} connections ... {total}/{total}')
 
     def bind_logger(self, logger: Logger):

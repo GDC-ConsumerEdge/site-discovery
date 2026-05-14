@@ -23,3 +23,26 @@ def test_verify_quic_connection_follows_redirect():
         assert res.abstracts['http_code'] == 200
         assert 'Final Content' in res.response
         assert mock_request.call_count == 2
+
+def test_verify_playbook_qbone_uses_new_key():
+    from siteDiscoveryTool import SiteDiscoveryTool
+    import io
+    from unittest.mock import MagicMock
+    
+    yaml_content = """
+qbone_ips:
+  - "1.2.3.4:443"
+"""
+    tool = SiteDiscoveryTool()
+    tool.load_playbook(io.StringIO(yaml_content))
+    tool.iprr = MagicMock()
+    
+    with patch('siteDiscoveryTool.verify_quic_connection') as mock_verify:
+        mock_verify.return_value.bOK = True
+        mock_verify.return_value.abstracts = {'ip': ['1.2.3.4'], 'port': 443, 'proto': 'QUIC', 'host': '1.2.3.4'}
+        
+        tool.verify_playbook_qbone()
+        
+        assert mock_verify.called
+        assert mock_verify.call_args[0] == ('1.2.3.4', 443)
+        assert len(tool.results['qbone']) == 1
