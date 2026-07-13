@@ -35,10 +35,7 @@ tcp:
   - www.googleapis.com:443
   - gcr.io:443
   - k8s.gcr.io:443
-  - logging.gdce.googleapis.com:443
-  - storage.gdce.googleapis.com:443
   - gdce-edgeos-signatures.storage.googleapis.com:443
-  - gdce-edgeos-signatures.storage.gdce.googleapis.com:443
 udp:
   - accounts.google.com:443
   - alt1-cache-management-prod.google.com:443
@@ -70,10 +67,7 @@ udp:
   - www.googleapis.com:443
   - gcr.io:443
   - k8s.gcr.io:443
-  - logging.gdce.googleapis.com:443
-  - storage.gdce.googleapis.com:443
   - gdce-edgeos-signatures.storage.googleapis.com:443
-  - gdce-edgeos-signatures.storage.gdce.googleapis.com:443
 ssl:
   - accounts.google.com:443
   - alt1-cache-management-prod.google.com:443
@@ -105,10 +99,7 @@ ssl:
   - www.googleapis.com:443
   - gcr.io:443
   - k8s.gcr.io:443
-  - logging.gdce.googleapis.com:443
-  - storage.gdce.googleapis.com:443
   - gdce-edgeos-signatures.storage.googleapis.com:443
-  - gdce-edgeos-signatures.storage.gdce.googleapis.com:443
 qbone:
   - qbone-africa-south1.google.com:443
 #  - qbone-apac-1.google.com:443
