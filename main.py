@@ -88,7 +88,7 @@ def main():
     # log_file_path = os.path.join(config_dict['out_dir'], log_file_name)
     log_file_name = os.path.join(config_dict['log_dir'], 'site-discovery.log')
     try:
-        log_file = open(log_file_name, 'a')
+        log_file = open(log_file_name, 'w')
         log.add_output(log_file)
         print(f'[INFO]log file {log_file_name}')
     except:
