@@ -23,6 +23,7 @@ from time import ctime
 import ipaddress
 import socket
 import ssl
+from urllib.parse import urlparse
 import dns.resolver
 import dns.reversename
 import ntplib
@@ -429,24 +430,43 @@ def verify_quic_connection(host: str, port: int, proto_name: str = 'QUIC') -> Ve
     ret.abstracts['host'] = host
     ret.abstracts['port'] = port
     ret.abstracts['proto'] = proto_name
-    if is_ipv4_unicast(host):
-        ret.abstracts['ip'] = [host]
-    else:
-        dns_results = resolve_dns(host)
-        ret.abstracts['ip'] = dns_results.abstracts['ip'] if dns_results.bOK else []
-    try:
-        res = quic_client_request([f"https://{host}:{port}"], include=True, insecure=True)
-        headers = res['headers'][0]
-        content = res['contents'][0]
-        ret.response = headers + content
-        ret.abstracts['http_code'] = None
-        g = re.search(r':status:\s*(\d+)', headers)
-        if g:
-            ret.abstracts['http_code'] = int(g[1])
-            ret.bOK = True
-    except Exception as e:
-        ret.errReason = type(e).__name__
-        ret.response = str(e)
+
+    current_host = host
+    current_port = port
+
+    for attempt in range(2):  # Allow 1 redirect
+        if is_ipv4_unicast(current_host):
+            ret.abstracts['ip'] = [current_host]
+        else:
+            dns_results = resolve_dns(current_host)
+            ret.abstracts['ip'] = dns_results.abstracts['ip'] if dns_results.bOK else []
+        try:
+            res = quic_client_request([f"https://{current_host}:{current_port}"], include=True, insecure=True)
+            headers = res['headers'][0]
+            content = res['contents'][0]
+            ret.response = headers + content
+            ret.abstracts['http_code'] = None
+            g = re.search(r':status:\s*(\d+)', headers)
+            if g:
+                status_code = int(g[1])
+                ret.abstracts['http_code'] = status_code
+
+                if status_code in [301, 302] and attempt == 0:
+                    loc = re.search(r'location:\s*(\S+)', headers, re.IGNORECASE)
+                    if loc:
+                        redirect_url = loc.group(1)
+                        parsed = urlparse(redirect_url)
+                        current_host = parsed.hostname
+                        current_port = parsed.port or 443
+                        continue  # Follow redirect
+
+                if status_code == 200:
+                    ret.bOK = True
+            break  # Exit loop if not a redirect or second attempt
+        except Exception as e:
+            ret.errReason = type(e).__name__
+            ret.response = str(e)
+            break
     return ret
 
 
